@@ -1,0 +1,35 @@
+<div class="container">
+  <nav class="level">
+  
+      <div class="level-item">
+        {% unless paginate.previous.is_link %}
+          <div class="button">
+            {% include 'icon-arrow-left' %}
+            <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+          </div>
+        {% else %}
+          <a href="{{ paginate.previous.url }}" class="button">
+            {% include 'icon-arrow-left' %}
+            <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+          </a>
+        {% endunless %}
+      </div>
+
+      <div class="level-item">
+        {{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}
+      </div>
+
+      <div class="level-item">
+        {% unless paginate.next.is_link %}
+          <div class="button">
+            <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+          </div>
+        {% else %}
+          <a href="{{ paginate.next.url }}" class="button">
+            <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+          </a>
+        {% endunless %}
+      </div>
+
+  </nav>
+</div>

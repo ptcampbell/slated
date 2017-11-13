@@ -1,0 +1,27 @@
+{% unless grid_image_width %}
+  {%- assign grid_image_width = '600x600' -%}
+{% endunless %}
+
+<div class="box{% unless product.available %} sold-out{% endunless %}">
+  <a class="link" href="{{ product.url | within: collection }}">
+
+    <figure class="image is-square">
+      <img class="thumbnail" src="{{ product.featured_image.src | img_url: grid_image_width, crop: 'center' }}" alt="{{ product.featured_image.alt }}">
+    </figure>    
+
+    <div class="product-name text-truncate">
+      {{ product.title }}
+    </div>
+
+    {% if section.settings.show_vendor %}
+      <div class="vendor text-truncate">
+        {{ product.vendor }}
+      </div>
+    {% endif %}
+    
+    <div class="price">
+      {% include 'product-price' %}
+    </div>
+
+  </a>
+</div>

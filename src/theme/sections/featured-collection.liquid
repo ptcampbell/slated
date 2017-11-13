@@ -1,0 +1,56 @@
+<div class="container">
+
+  {% if section.settings.title != blank %}
+    <h2 class="title has-text-centered">{{ section.settings.title | escape }}</h2>
+  {% endif %}
+
+  {%- assign collection = collections[section.settings.collection] -%}
+
+  <div class="columns is-parent is-multiline">
+
+    {% for product in collection.products limit: 6 %} 
+      
+    {% else %}
+      {% for i in (1..6) %}
+        <div class="column is-one-quarter">
+          <a href="#">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+
+            <p>
+              {{ 'homepage.onboarding.product_title' | t }}
+            </p>
+          </a>
+          <p>{{ 1999 | money }}</p>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

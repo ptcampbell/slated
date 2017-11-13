@@ -1,0 +1,168 @@
+{% if section.settings.layout == 'grid' %}
+  {%- assign limit = section.settings.grid | times: section.settings.rows -%}
+{% else %}
+  {%- assign limit = 16 -%}
+{% endif %}
+{% paginate collection.products by limit %}
+
+<div data-section-id="{{ section.id }}" data-section-type="section">
+
+  <header class="section">
+    <div class="container">
+      {% include 'collection-header' %}
+    </div>
+  </header>
+
+  <section class="section" id="Collection">
+    <div class="container">
+      <div class="columns">
+
+        {% if section.settings.tags_enable %}
+          <div class="column is-2">
+            <aside class="menu">        
+              <p class="menu-label">
+                Transactions
+              </p>
+              <ul class="menu-list">
+                <li><a>Payments</a></li>
+                <li><a>Transfers</a></li>
+                <li><a>Balance</a></li>
+              </ul>
+            </aside>
+          </div>
+        {% endif %}
+
+        <div class="column">
+          <div class="columns">
+            
+            {% case section.settings.grid %}
+            {% when '2' %}
+              {%- assign grid_item_width = 'is-one-half' -%}
+              {%- assign image_size = '500x500' -%}
+            {% when '3' %}
+              {%- assign grid_item_width = 'is-one-third is-half-mobile' -%}
+              {%- assign image_size = '500x500' -%}
+            {% when '4' %}
+              {%- assign grid_item_width = 'is-one-quarter is-half-mobile' -%}
+              {%- assign image_size = '300x300' -%}
+            {% when '5' %}
+              {%- assign grid_item_width = 'is-one-fifth is-half-mobile' -%}
+              {%- assign image_size = '300x300' -%}
+            {% endcase %}
+            
+            <div class="columns is-multiline">
+              {% for product in collection.products %}
+                <div class="column {{ grid_item_width }}">
+                  {% include 'product-card-grid', grid_image_width: image_size %}
+                </div>
+              {% else %}
+                {% comment %}
+                Add default products to help with onboarding for collections/all only.
+
+                The onboarding styles and products are only loaded if the
+                store has no products.
+                {% endcomment %}
+                {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+                  <div class="grid__item">
+                    <div class="grid grid--uniform">
+                      {% for i in (1..8) %}
+                        <div class="grid__item {{ grid_item_width }}">
+                          <div class="grid-view-item">
+                            <a href="#" class="grid-view-item__link">
+                              <div class="grid-view-item__image">
+                                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                              </div>
+                              <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                              <div class="grid-view-item__meta">
+                                <span class="product-price__price">$19.99</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% else %}
+                  {%- assign is_empty_collection = true -%}
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            {% if is_empty_collection %}
+              <div class="grid__item small--text-center">
+                <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+              </div>
+            {% endif %}
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+{% if paginate.pages > 1 %}
+  <div class="section">
+    {% include 'pagination' %}
+  </div>
+{% endif %}  
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [
+    {
+      "type": "select",
+      "id": "grid",
+      "label": "Products per row (max)",
+      "default": "4",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendors",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "sort_enable",
+      "label": "Enable sorting",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "tags_enable",
+      "label": "Enable tag filtering",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

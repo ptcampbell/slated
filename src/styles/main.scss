@@ -1,0 +1,21 @@
+/*
+ *   Slated Theme Scaffolding
+ * ------------------*/
+
+// bulma utilities and theme vars
+@import 'node_modules/bulma/sass/utilities/all';
+@import 'global/variables';
+
+// import bumla
+@import 'node_modules/bulma/bulma';
+
+// global styles
+@import 'global/mixins';
+@import 'global/blank-states';
+
+// sectional components
+@import 'sections/header';
+@import 'sections/featured-collection';
+@import 'sections/product-template';
+@import 'sections/collection-template';
+@import 'sections/collection-filter';
