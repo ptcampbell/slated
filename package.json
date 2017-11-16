@@ -30,6 +30,7 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
     "gulp-shopify-theme": "^1.0.14",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-svgmin": "^1.2.4",

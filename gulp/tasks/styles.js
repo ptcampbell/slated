@@ -3,6 +3,7 @@ const config = require('../gulp.config')
 const tailwindcss = require('tailwindcss')
 const tailWindConfig = require('../tailwind.config')
 const when = require('gulp-if')
+const replace = require('gulp-replace');
 const $ = require('gulp-load-plugins')()
 
 const postcss = require('gulp-postcss')
@@ -16,11 +17,12 @@ gulp.task('main:styles', function () {
   return gulp.src(config.src.styles + '/main.scss')
     .pipe($.sass({importer: moduleImporter()}))
     .on('error', $.sass.logError)
-    .pipe($.autoprefixer({browsers: ['last 2 versions', 'iOS 8']}))
+    // this breaks liquid vars – consider escaping {{}}
+    //.pipe($.autoprefixer({browsers: ['last 2 versions', 'iOS 8']}))
     .pipe(when(production, $.groupCssMediaQueries()))
     .pipe(when(production, $.csscomb()))
     .pipe(when(production, $.cssnano()))
-    .pipe($.rename({extname: '.scss.css'}))
+    .pipe($.rename({extname: '.scss.liquid'}))
     .pipe(gulp.dest(destination))
 })
 

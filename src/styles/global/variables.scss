@@ -1,5 +1,5 @@
 /*================ Color Variables ================*/
-$color-primary: #{'{{ settings.color_primary }}'};
+$color-primary: #{'{{ settings.color_text }}'};
 
 // Text colors
 $color-body-text: #{'{{ settings.color_body_text }}'};

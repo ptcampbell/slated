@@ -12,16 +12,16 @@
     "settings": [
       {
         "type": "color",
-        "id": "color_text",
-        "label": "Text",
-        "default": "#3d4246"
-      },
-      {
-        "type": "color",
         "id": "color_body_text",
         "label": "Body text",
         "default": "#788188"
       },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#00d1b2"
+      },      
       {
         "type": "color",
         "id": "color_sale_text",

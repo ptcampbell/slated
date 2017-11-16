@@ -1,15 +1,16 @@
+@charset "UTF-8";
 /*
  *   Slated Theme Scaffolding
  * ------------------*/
 
 // bulma utilities and theme vars
 @import 'node_modules/bulma/sass/utilities/all';
-@import 'global/variables';
 
 // import bumla
 @import 'node_modules/bulma/bulma';
 
 // global styles
+@import 'global/variables';
 @import 'global/mixins';
 @import 'global/blank-states';
 
