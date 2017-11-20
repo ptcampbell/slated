@@ -1,20 +1,23 @@
 @charset "UTF-8";
+
 /*
- *   Slated Theme Scaffolding
- * ------------------*/
+ * 
+ *   Slated Base Theme - Theme Anorak
+ *
+ * ------------------------------------*/
 
-// bulma utilities and theme vars
-@import 'node_modules/bulma/sass/utilities/all';
+// variables
+@import 'node_modules/bulma/sass/utilities/_all';
+@import 'global/variables';
 
-// import bumla
+// use bulma
 @import 'node_modules/bulma/bulma';
 
 // global styles
-@import 'global/variables';
 @import 'global/mixins';
 @import 'global/blank-states';
 
-// sectional components
+// theme components
 @import 'sections/header';
 @import 'sections/featured-collection';
 @import 'sections/product-template';

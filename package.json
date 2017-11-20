@@ -19,6 +19,7 @@
     "bulma": "^0.6.1",
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
+    "flickity": "^2.0.10",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-changed": "^3.1.0",
