@@ -83,7 +83,7 @@
         </span>
 
         {% if product.compare_at_price_max > product.price %}
-          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+          <span class="is-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
           <s data-compare-price>
             {% if current_variant.compare_at_price > current_variant.price %}
               {{ current_variant.compare_at_price | money }}

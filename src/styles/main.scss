@@ -8,7 +8,9 @@
 
 // variables
 @import 'node_modules/bulma/sass/utilities/_all';
+
 @import 'global/variables';
+@import 'global/helper-classes';
 
 // use bulma
 @import 'node_modules/bulma/bulma';

@@ -51,7 +51,7 @@
                   {{ 'products.product.on_sale' | t }}
                   <span itemprop="price">{{ item.price | money }}</span>
                 {% endif %}
-                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                <span class="is-hidden">{{ 'products.product.regular_price' | t }}</span>
                 <s>{{ item.compare_at_price | money }}</s>
               {% else %}
                 {% if item.price_varies %}

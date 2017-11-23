@@ -5,7 +5,7 @@
 
   {% if section.blocks.size > 0 %}
     <div class="slideshow-wrapper">
-      <button type="button" class="visually-hidden slideshow__pause" data-id="{{ section.id }}" aria-live="polite">
+      <button type="button" class="is-hidden slideshow__pause" data-id="{{ section.id }}" aria-live="polite">
         <span class="slideshow__pause-stop">
           {% include 'icon-pause' %}
           <span class="icon__fallback-text">{{ 'sections.slideshow.pause_slideshow' | t }}</span>

@@ -29,17 +29,24 @@ theme.Product = (function() {
 	 */
 	function Product(container) {	
 
-		// slick slider
-		$('.product-slider').slick({
-			dots: true,
-			slide: 'li',
-			centerMode: true,
+		// product image slider
+		$('.slider-product').slick({
 			slidesToShow: 1,
-			customPaging: function (slider, i) {
-				return '<button class="tab">' + $('.slick-thumbs li:nth-child(' + (i + 1) + ')').html() + '</button>';
+			slidesToScroll: 1,
+			arrows: true,
+			dots: true,
+			fade: false,
+			adaptiveHeight: true,
+			speed: 300,
+			cssEase: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+			lazyLoad: 'progressive',
+			prevArrow: '<div class="prev-arrow"><i class="mdi mdi-24px keyboard-arrow-left"></i></div>',
+			nextArrow: '<div class="next-arrow"><i class="mdi mdi-24px keyboard-arrow-right"></i></div>',
+			customPaging: function(slick, index) {
+				return '<button class="thumbnail" style="background-image:url('+$(slick.$slides[index]).data('thumb')+')"></button>';
 			}
 		});
-
+		
 		this.$container = $(container);
 
 		// Stop parsing if we don't have the product json script tag when loading
