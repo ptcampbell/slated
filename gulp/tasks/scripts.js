@@ -16,7 +16,6 @@ gulp.task('vendor:scripts', () => {
   const b = browserify({
     debug: !production
   })
-
   // require all libs specified in vendors array
   vendors.forEach(lib => {
     b.require(lib)
@@ -27,8 +26,7 @@ gulp.task('vendor:scripts', () => {
     .pipe(buffer())
     .pipe(when(!production, $.sourcemaps.init({ loadMaps: true })))
     .pipe(when(!production, $.sourcemaps.write()))
-    // All production stuff here
-    // Rename file to .min and uglify that stuff
+    // production
     .pipe(when(production, $.uglify())).on('error', config.onError)
     .pipe(gulp.dest(destination))
 })

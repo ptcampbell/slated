@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Debut",
-    "theme_author": "Shopify",
-    "theme_version": "1.0.0",
-    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/using-themes\/sections",
-    "theme_support_email": "theme-support@shopify.com"
+    "theme_name": "Slated",
+    "theme_author": "Theme Anorak",
+    "theme_version": "0.1",
+    "theme_documentation_url": "https:\/\/themeanorak.com\/",
+    "theme_support_email": "support@themeanorak.com"
   },
   {
     "name": "Colors",
