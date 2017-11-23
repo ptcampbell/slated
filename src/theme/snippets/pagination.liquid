@@ -2,13 +2,13 @@
   <nav class="level">
       <div class="level-item">
         {% unless paginate.previous.is_link %}
-          <p>
-            <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+          <p class="has-text-grey-light">
+            {{ 'general.pagination.previous' | t }}
           </p>
         {% else %}
           <p>
             <a href="{{ paginate.previous.url }}">
-              <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+              {{ 'general.pagination.previous' | t }}
             </a>
           </p>
         {% endunless %}
@@ -16,12 +16,12 @@
           {{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}
         </div>
         {% unless paginate.next.is_link %}
-          <p>
-            <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+          <p class="has-text-grey-light">
+            {{ 'general.pagination.next' | t }}
           </p>
         {% else %}
           <a href="{{ paginate.next.url }}">
-            <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+            {{ 'general.pagination.next' | t }}
           </a>
         {% endunless %}
       </div>

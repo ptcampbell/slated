@@ -17,7 +17,9 @@
           <div class="slider-product{% if product.images.size < 2 %} is-single{% endif %}">
             {% for image in product.images %}
             <a data-thumb="{{ image.src | img_url: '80x80', crop: 'center' }}" data-index="{{ forloop.index }}" href="{{ image.src | img_url: '2000x2000' }}" data-product-single-thumbnail>
-              <img src="{{ image.src | img_url: '600x600', crop: 'center' }}" alt="{{ image.alt | escape }}">
+              <figure class="image is-square">
+                <img src="{{ image.src | img_url: '600x600', crop: 'center' }}" alt="{{ image.alt | escape }}">
+              </figure>
             </a>
             {% endfor %}
           </div>
