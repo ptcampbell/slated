@@ -1,7 +1,5 @@
 const gulp = require('gulp')
 const config = require('../gulp.config')
-const tailwindcss = require('tailwindcss')
-const tailWindConfig = require('../tailwind.config')
 const when = require('gulp-if')
 const replace = require('gulp-replace');
 const $ = require('gulp-load-plugins')()

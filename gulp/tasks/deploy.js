@@ -43,7 +43,6 @@ gulp.task('theme:upload', () => {
 
 gulp.task('deploy', gulp.series('theme:init', 'theme:upload'))
 
-// Danger Zone 💀
 gulp.task('theme:purge', function (done) {
   theme.purge()
   done()

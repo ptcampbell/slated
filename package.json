@@ -1,9 +1,9 @@
 {
-  "name": "ta-slate",
+  "name": "ta-slated",
   "description": "Scaffolding theme for Shopify",
   "license": "MIT",
   "repository": "https://themeanorak.com",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
     "start": "npm install",
     "code": "gulp",
@@ -14,12 +14,23 @@
   "dependencies": {
     "babel-preset-env": "^1.5.2",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
     "bulma": "^0.6.1",
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
-    "flickity": "^2.0.10",
+    "jquery": "^3.2.1",
+    "postcss-scss": "^1.0.2",
+    "require-dir": "^0.3.2",
+    "sass-lint": "^1.12.1",
+    "sass-module-importer": "^1.4.0",
+    "svg4everybody": "^2.1.8",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webfontloader": "^1.6.28",
+    "yargs": "^8.0.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-changed": "^3.1.0",
@@ -29,31 +40,17 @@
     "gulp-group-css-media-queries": "^1.2.0",
     "gulp-if": "^2.0.2",
     "gulp-load-plugins": "^1.5.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
+    "gulp-sass": "^3.1.0",
     "gulp-shopify-theme": "^1.0.14",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-svgmin": "^1.2.4",
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.11",
-    "gulp-zip": "^4.0.0",
-    "jquery": "^3.2.1",
-    "postcss-scss": "^1.0.2",
-    "require-dir": "^0.3.2",
-    "sass-lint": "^1.12.1",
-    "sass-module-importer": "^1.4.0",
-    "standard": "^10.0.2",
-    "svg4everybody": "^2.1.8",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "webfontloader": "^1.6.28",
-    "yargs": "^8.0.1"
-  },
-  "devDependencies": {
-    "gulp-postcss": "^7.0.0",
-    "gulp-sass": "^3.1.0",
-    "tailwindcss": "^0.1.6"
+    "gulp-zip": "^4.0.0"
   }
 }

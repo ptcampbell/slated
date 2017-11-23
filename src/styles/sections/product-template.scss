@@ -1,3 +1,7 @@
+/*
+ *   Product template
+ * ------------------------------------*/
+
 .product-template {
 	.subtitle {
 		opacity:0.5;
@@ -20,46 +24,65 @@
 	}
 }
 
+/*
+ *   Slick slider
+ * ------------------------------------*/
+
 .slider-product {
-	visibility: hidden;
-	transition:200ms opacity linear;
 	opacity:0;
-	margin-bottom:1em;
+	visibility: hidden;
+	transition:opacity 200ms $easing;
+
+	.slick-list {
+		margin-bottom:1em;
+		
+		.slick-slide {
+			width:100%;
+		
+			img {
+				width:100%;
+				height:auto;
+			}
+			&:focus {
+				outline:none;
+			}
+		}
+	}
 	
+	.slick-dots {
+		li {
+			width:50px;
+			height:50px;
+			opacity:0.5;
+			border:2px solid transparent;
+			border-radius:2px;
+			box-sizing: content-box;
+			padding:0;
+			margin:0.25em;
+			transition:opacity 500ms $easing, border 500ms $easing;
+	
+			button {
+				width:50px;
+				height:50px;
+				background-size: cover;
+				background-position: center center;
+				padding:0;
+				margin:0;
+				border-radius:0;
+			}
+	
+			&.slick-active {
+				opacity:1;
+				border:2px solid $primary;
+			}
+		}
+	}	
+
 	&.slick-initialized { 
 		visibility: visible;
 		opacity:1;
 	}
-}
-
-.slick-dots {
-	li {
-		width:50px;
-		height:50px;
-		opacity:0.5;
-		border:2px solid transparent;
-		border-radius:2px;
-		box-sizing: content-box;
-		padding:0;
-		transition:opacity 500ms $easing, border 500ms $easing;
-
-		button {
-			width:50px;
-			height:50px;
-			background-size: cover;
-			background-position: center center;
-			padding:0;
-			margin:0;
-			border-radius:0;
-		}
-
-		&.slick-active {
-			opacity:1;
-			border:2px solid $primary;
-		}
+	&.is-single .slick-dots {
+		display:none;
 	}
-}
-
-.slick-slide:focus {
-	outline:none;
 }

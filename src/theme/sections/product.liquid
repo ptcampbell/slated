@@ -11,20 +11,16 @@
 
   <div class="container">
 
-    <div class="columns">
+    <div class="columns is-8">
 
       <div class="column is-half">
-         
-        {% if product.images.size > 1 %}
-          <div class="slider-product">
+          <div class="slider-product{% if product.images.size < 2 %} is-single{% endif %}">
             {% for image in product.images %}
             <a data-thumb="{{ image.src | img_url: '80x80', crop: 'center' }}" data-index="{{ forloop.index }}" href="{{ image.src | img_url: '2000x2000' }}" data-product-single-thumbnail>
               <img src="{{ image.src | img_url: '600x600', crop: 'center' }}" alt="{{ image.alt | escape }}">
             </a>
             {% endfor %}
           </div>
-        {% endif %}
-
       </div>
 
       <div class="column is-half">

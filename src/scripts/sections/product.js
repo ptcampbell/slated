@@ -35,7 +35,7 @@ theme.Product = (function() {
 			slidesToScroll: 1,
 			arrows: true,
 			dots: true,
-			fade: false,
+			fade: true,
 			adaptiveHeight: true,
 			speed: 300,
 			cssEase: 'cubic-bezier(0.4, 0.0, 0.2, 1)',

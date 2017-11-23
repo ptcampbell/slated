@@ -1,34 +1,27 @@
-# ta-slate
+# 🚧 slated
 
-## Scaffolded by Shopify Skeleton Version 2.0.0
-
-## Quick Start
-
-Compile things and auto upload to shopify
-```bash
-$ npm run code
-```
-
-Zip everything and code in production mode
-```bash
-$ npm run build
-```
-
-Full deployment
-```bash
-$ npm run deploy
-```
-
-Delete theme files
-```bash
-$ npm run kill-theme
-```
+## About
+Slated is a starter theme for Shopify using a mixture of elements from Slate, ThemeKit, [Shopify Skeleton](https://github.com/Pixel2HTML/shopify-skeleton) and Timber &mdash; using Bulma as a CSS framework.
 
 ## Features
-
+- ES6 support
 - Sourcemaps
-- ES6
-- Browserify
-- Split vendor and app code (deployment and )
-- Browser Sync
-- Zip everything in the end
+- Browser sync
+- Slate [helper scripts](https://shopify.github.io/slate/js-examples/)
+- SCSS imports and liquid variables
+
+## Usage
+
+```bash
+# Compile and watch
+$ npm run code
+
+# zip for production
+$ npm run build
+
+# full deployment
+$ npm run deploy
+
+# delete theme files
+$ npm run kill-theme
+```
