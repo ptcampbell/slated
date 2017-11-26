@@ -1,5 +1,34 @@
-.pagination-snippet {
-	.pagination-count {
-		margin:0 1em;
+/*
+ *   Collection header
+ * ------------------------------------*/
+
+.collection-header {
+}
+
+/*
+ *   Collection filters
+ * ------------------------------------*/
+
+.collection-filters {
+	padding-top:1.5rem;
+	padding-bottom:1.5rem;
+
+	.filter-product-count {
+		padding-top: 0.4em;
 	}
+}
+
+/*
+ *   Product grid
+ * ------------------------------------*/
+
+.collection-loop {
+	background:whitesmoke;
+}
+
+/*
+ *   Pagination
+ * ------------------------------------*/
+
+.pagination {
 }

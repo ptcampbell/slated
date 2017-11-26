@@ -15,8 +15,7 @@ gulp.task('main:styles', function () {
   return gulp.src(config.src.styles + '/main.scss')
     .pipe($.sass({importer: moduleImporter()}))
     .on('error', $.sass.logError)
-    // this breaks liquid vars – consider escaping {{}}
-    //.pipe($.autoprefixer({browsers: ['last 2 versions', 'iOS 8']}))
+    //.pipe($.autoprefixer({browsers: ['last 2 versions', 'iOS 8']})) - TODO (need to escape liquid curlies for this to work)
     .pipe(when(production, $.groupCssMediaQueries()))
     .pipe(when(production, $.csscomb()))
     .pipe(when(production, $.cssnano()))

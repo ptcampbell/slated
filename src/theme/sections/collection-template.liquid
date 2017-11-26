@@ -7,92 +7,82 @@
 
 <div data-section-id="{{ section.id }}" data-section-type="section">
 
-  <header class="section">
-    <div class="container">
-      {% include 'collection-header' %}
-    </div>
-  </header>
+  {% include 'collection-header' %}
 
-  <section class="section" id="Collection">
-    <div class="container">
-        {% if section.settings.tags_enable %}
-          
-        {% endif %}
-        <div class="column">
-          <div class="columns">
-            
-            {% case section.settings.grid %}
-            {% when '2' %}
-              {%- assign grid_item_width = 'is-one-half' -%}
-              {%- assign image_size = '500x500' -%}
-            {% when '3' %}
-              {%- assign grid_item_width = 'is-one-third is-half-mobile' -%}
-              {%- assign image_size = '500x500' -%}
-            {% when '4' %}
-              {%- assign grid_item_width = 'is-one-quarter is-half-mobile' -%}
-              {%- assign image_size = '300x300' -%}
-            {% when '5' %}
-              {%- assign grid_item_width = 'is-one-fifth is-half-mobile' -%}
-              {%- assign image_size = '300x300' -%}
-            {% endcase %}
-            
-            <div class="columns is-multiline">
-              {% for product in collection.products %}
-                <div class="column {{ grid_item_width }}">
-                  {% include 'product-card-grid', grid_image_width: image_size %}
-                </div>
-              {% else %}
-                {% comment %}
-                Add default products to help with onboarding for collections/all only.
+  <div class="collection-filters section">
+    {% include 'collection-filters' %}
+  </div>  
 
-                The onboarding styles and products are only loaded if the
-                store has no products.
-                {% endcomment %}
-                {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-                  <div class="grid__item">
-                    <div class="grid grid--uniform">
-                      {% for i in (1..8) %}
-                        <div class="grid__item {{ grid_item_width }}">
-                          <div class="grid-view-item">
-                            <a href="#" class="grid-view-item__link">
-                              <div class="grid-view-item__image">
-                                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-                              </div>
-                              <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-                              <div class="grid-view-item__meta">
-                                <span class="product-price__price">$19.99</span>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                {% else %}
-                  {%- assign is_empty_collection = true -%}
-                {% endif %}
-              {% endfor %}
+  <section class="collection-loop section" id="Collection">
+    <div class="container">
+
+        {% case section.settings.grid %}
+        {% when '2' %}
+          {%- assign grid_item_width = 'is-one-half' -%}
+          {%- assign image_size = '500x500' -%}
+        {% when '3' %}
+          {%- assign grid_item_width = 'is-one-third is-half-mobile' -%}
+          {%- assign image_size = '500x500' -%}
+        {% when '4' %}
+          {%- assign grid_item_width = 'is-one-quarter is-half-mobile' -%}
+          {%- assign image_size = '300x300' -%}
+        {% when '5' %}
+          {%- assign grid_item_width = 'is-one-fifth is-half-mobile' -%}
+          {%- assign image_size = '300x300' -%}
+        {% endcase %}
+        
+        <div class="columns is-multiline">
+          {% for product in collection.products %}
+            <div class="column {{ grid_item_width }}">
+              {% include 'product-card-grid', grid_image_width: image_size %}
             </div>
+          {% else %}
+            {% comment %}
+            Add default products to help with onboarding for collections/all only.
 
-            {% if is_empty_collection %}
-              <div class="grid__item small--text-center">
-                <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+            The onboarding styles and products are only loaded if the
+            store has no products.
+            {% endcomment %}
+            {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+              <div class="grid__item">
+                <div class="grid grid--uniform">
+                  {% for i in (1..8) %}
+                    <div class="grid__item {{ grid_item_width }}">
+                      <div class="grid-view-item">
+                        <a href="#" class="grid-view-item__link">
+                          <div class="grid-view-item__image">
+                            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                          </div>
+                          <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                          <div class="grid-view-item__meta">
+                            <span class="product-price__price">$19.99</span>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
               </div>
+            {% else %}
+              {%- assign is_empty_collection = true -%}
             {% endif %}
-            
-          </div>
+          {% endfor %}
         </div>
+
+        {% if is_empty_collection %}
+          <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+        {% endif %}           
+
+        </div>
+        
     </div>
   </section>
 </div>
 
 {% if paginate.pages > 1 %}
-  <div class="section">
-    {% include 'pagination' %}
-  </div>
+  {% include 'pagination' %}
 {% endif %}  
-
 {% endpaginate %}
 
 {% schema %}

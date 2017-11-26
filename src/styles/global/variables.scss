@@ -1,15 +1,7 @@
 // theme settings
-$color-text: #{'{{ settings.color_body_text }}'};
-$color-primary: #{'{{ settings.color_primary }}'};
+$color-text: #{"{{ settings.color_body_text }}"};
+$color-primary: #{"{{ settings.color_primary }}"};
 
-// override bulma variables
-$dark: $color-text;
-$primary: $color-primary;
-
-// 4. Setup your Custom Colors
-$linkedin: #0077B5;
-$linkedin-invert: findColorInvert($linkedin);
-$twitter: #1DA1F2;
-$twitter-invert: findColorInvert($twitter);
-$github: #222222;
-$github-invert: findColorInvert($github);
+// set bulma defaults 
+$primary: #D51C3B;
+$link: #D51C3B;

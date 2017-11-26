@@ -2,7 +2,7 @@
   {%- assign grid_image_width = '600x600' -%}
 {% endunless %}
 
-<div class="box{% unless product.available %} sold-out{% endunless %}">
+<div class="product-card-grid box{% unless product.available %} sold-out{% endunless %}">
   <a class="link" href="{{ product.url | within: collection }}">
 
     <figure class="image is-square">

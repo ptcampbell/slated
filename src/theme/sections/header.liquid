@@ -10,7 +10,7 @@
 
     <header class="navbar is-fixed-top">
 
-      <h1 class="navbar-menu" itemscope itemtype="http://schema.org/Organization">
+      <h1 class="navbar-brand" itemscope itemtype="http://schema.org/Organization">
         <a href="/" itemprop="url" class="navbar-item site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
           {% if section.settings.logo != blank %}
             {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
@@ -24,7 +24,7 @@
         </a>
       </h1>
 
-      {% comment %} consider separate file here {% endcomment %}
+      {% comment %} consider separate file here 
       {% if shop.customer_accounts_enabled %}
           <ul>
             {% if customer %}
@@ -49,56 +49,55 @@
             {% endif %}
           </ul>
       {% endif %}
+      {% endcomment %}
 
-      <nav class="navbar-menu has-text-centered primary" role="navigation">
-          {% for link in linklists[section.settings.main_linklist].links %}
-            {%- assign child_list_handle = link.title | handleize -%}
-            {% if menus[child_list_handle].links != blank %}
-              <div class="has-dropdown has-dropdown is-hoverable {% if link.active %} site-nav--active{% endif %}">
+      <nav class="navbar-menu" role="navigation">
+
+          <div class="navbar-start">
+            {% for link in linklists[section.settings.main_linklist].links %}
+              {%- assign child_list_handle = link.title | handleize -%}
+              {% if menus[child_list_handle].links != blank %}
+              <div class="navbar-item has-dropdown is-hoverable">
                 <a href="{{ link.url }}" class="navbar-link">
-                  {{ link.title }}
-                  {% include 'icon-arrow-down' %}
+                    {{ link.title }}
                 </a>
                 <div class="navbar-dropdown">
                   {% for childlink in menus[child_list_handle].links %}
-                    <div {% if childlink.active %}class="site-nav--active"{% endif %}>
-                      <a href="{{ childlink.url }}" class="navbar-link">{{ childlink.title | escape }}</a>
-                    </div>
+                    <a href="{{ childlink.url }}" class="navbar-item{% if childlink.active %} is-active{% endif %}">{{ childlink.title | escape }}</a>
                   {% endfor %}
                 </div>
               </div>
-            {% else %}
-              <div class="navbar-item{% if link.active %} active{% endif %}">
-                <a href="{{ link.url }}">{{ link.title }}</a>
-              </div>
-            {% endif %}
-          {% endfor %}
-      </nav>
-
-      <nav class="navbar-menu secondary">
-        <a href="/cart" class="navbar-item">
-          {{ 'layout.cart.title' | t }}
-          ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-        </a>
-        <a href="#" class="navbar-item">
-          <span class="icon is-medium">
-            <i class="mdi mdi-24px mdi-cart"></i>
-          </span>
-        </a>
-        <form class="navbar-item is-hidden" action="/search" method="get" role="search">
-          <label for="Search" class="label-hidden">
-            {{ 'general.search.placeholder' | t }}
-          </label>
-          <input type="search"
-                name="q"
-                id="Search"
-                value="{{ search.terms | escape }}"
-                placeholder="{{ 'general.search.placeholder' | t }}">
-          <button type="submit" class="btn">
-            {% include 'icon-search' %}
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-          </button>
-        </form>
+              {% else %}
+                <a class="navbar-item{% if link.active %} active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+      
+        <div class="navbar-end">
+          <a href="/cart" class="navbar-item">
+            {{ 'layout.cart.title' | t }}
+            ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+          </a>
+          <a href="#" class="navbar-item">
+            <span class="icon is-medium">
+              <i class="mdi mdi-24px mdi-cart"></i>
+            </span>
+          </a>
+          <form class="navbar-item is-hidden" action="/search" method="get" role="search">
+            <label for="Search" class="label-hidden">
+              {{ 'general.search.placeholder' | t }}
+            </label>
+            <input type="search"
+                  name="q"
+                  id="Search"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.placeholder' | t }}">
+            <button type="submit" class="btn">
+              {% include 'icon-search' %}
+              <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </form>
+        </div>
       </nav>
 
   </header>

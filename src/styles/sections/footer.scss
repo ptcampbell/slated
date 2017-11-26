@@ -1,0 +1,20 @@
+footer {
+	.footer-copyright {
+		margin-right:1em;
+	}
+	ul.social-icons {
+		margin:0;
+		padding:0;
+
+		li {
+			list-style:none;
+			display:inline-block;
+			margin-left:1em;
+			
+			svg {
+				width:1em;
+				height:1em;
+			}
+		}
+	}
+}

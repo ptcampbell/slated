@@ -1,60 +1,74 @@
 <footer class="footer">
-
   <div class="container">
 
-  {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
-  <ul>
-    {% for social in social_accounts %}
-      {%- assign social_handle = social | handleize -%}
-      {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-      {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
-
-      {% if settings[social_link] != blank %}
-        <li>
-          <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-            {% include social_icon %}
-            <span class="icon-fallback-text">{{ social }}</span>
-          </a>
-        </li>
-      {% endif %}
-
-    {% endfor %}
-  </ul>
-
-  {% if section.settings.show_payment_icons %}
-    {% unless shop.enabled_payment_types == empty %}
-      {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
-
-      <span class="is-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
-      <ul class="payment-icons">
-        {% for type in shop.enabled_payment_types %}
-          {% if payment_icons_available contains type %}
-            <li>
-              {%- assign icon_name = type | prepend: 'icon-' -%}
-              {% include icon_name %}
-              <span class="is-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endunless %}
-  {% endif %}
-
-  {%- assign footer_linklist = section.settings.footer_linklist -%}
-  {% if linklists[footer_linklist].links.size > 0 %}
-    <ul>
-      {% for link in linklists[footer_linklist].links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    <div class="columns">
+      {% for block in section.blocks %}
+        <div class="column is-one-quarter" {{ block.shopify_attributes }}>
+        {% case block.type %}
+          {% when 'menu' %}
+            {%- assign footer_linklist = block.settings.footer_linklist -%}
+            {% if linklists[footer_linklist].links.size > 0 %}
+              <ul>
+                {% if section.settings.show_menu_titles %}
+                  <li>{{linklists[footer_linklist].title}}</li>
+                {% endif %}
+                {% for link in linklists[footer_linklist].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% when 'text' %}
+            {{block.settings.richtext}}
+          {% endcase %}
+          </div>
       {% endfor %}
-    </ul>
-  {% endif %}
+    </div>
 
-  <div>
-    <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
+    <div class="level">
+      <div class="level-left">
+        <span class="footer-copyright">{{ shop.name | link_to: '/' }} &copy; {{ 'now' | date: "%Y" }}</span>
+        {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+      </div>
+      <div class="level-right">
+        <ul class="social-icons">
+          {% for social in social_accounts %}
+            {%- assign social_handle = social | handleize -%}
+            {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+            {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+
+            {% if settings[social_link] != blank %}
+              <li>
+                <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                  {% include social_icon %}
+                  <span class="is-hidden">{{ social }}</span>
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div> 
+
+   {% if section.settings.show_payment_icons %}
+      {% unless shop.enabled_payment_types == empty %}
+        {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
+        <span class="is-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+        <ul class="payment-icons">
+          {% for type in shop.enabled_payment_types %}
+            {% if payment_icons_available contains type %}
+              <li>
+                {%- assign icon_name = type | prepend: 'icon-' -%}
+                {% include icon_name %}
+                <span class="is-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endunless %}
+    {% endif %} 
+
+
   </div>
-
-  </div>
-
 </footer>
 
 {% schema %}
@@ -62,18 +76,44 @@
     "name": "Footer",
     "settings": [
       {
-        "type": "link_list",
-        "id": "footer_linklist",
-        "label": "First menu",
-        "default": "footer"
-      },
-      {
         "type": "checkbox",
         "id": "show_payment_icons",
         "label": "Show payment icons",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_menu_titles",
+        "label": "Show menu titles",
+        "default": false
+      }
+    ],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Text"
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+        "limit": 3,
+        "settings": [
+           {
+            "type": "link_list",
+            "id": "footer_linklist",
+            "label": "First menu",
+            "default": "footer"
+          }
+        ]
       }
     ]
   }
-
 {% endschema %}
