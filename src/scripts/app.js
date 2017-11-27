@@ -10,11 +10,17 @@ window.theme = window.theme || {}
 import './slate/a11y'
 import './slate/cart'
 import './slate/utils'
-import './slate/rte'
 import './slate/sections'
 import './slate/currency'
 import './slate/images'
 import './slate/variants'
+
+/*
+ *   Theme sections
+ * ------------------*/
+
+import './sections/slideshow-section'
+import './sections/product'
 
 /*
  *   Templates
@@ -22,12 +28,6 @@ import './slate/variants'
 
 import './templates/customers-addresses'
 import './templates/customers-login'
-
-/*
- *   Theme sections
- * ------------------*/
-
-import './sections/product'
 
 /*
  *   Slate Shopify helpers

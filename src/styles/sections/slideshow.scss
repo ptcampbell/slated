@@ -1,0 +1,432 @@
+// /*============================================================================
+//   Slider Section
+// ==============================================================================*/
+
+$slideshow-height-small: 475px;
+$slideshow-height-medium: 650px;
+$slideshow-height-large: 775px;
+$slideshow-loader: #fff;
+$z-index-slideshow-image: 1;
+$z-index-slideshow-video: 2;
+$z-index-slideshow-text: 3;
+$z-index-slideshow-controls: 4;
+$color-slideshow-close-bg: #fff;
+$color-slideshow-close-text: #000;
+
+.slideshow-wrapper {
+  position: relative;
+}
+
+.slideshow {
+  	overflow: hidden;
+	height: $slideshow-height-small - 150;
+  	margin-bottom: 0;
+
+	&.slideshow--medium {
+	height: $slideshow-height-medium - 150;
+	}
+
+	&.slideshow--large {
+	height: $slideshow-height-large - 200;
+	}
+
+	@include media-query($medium-up) {
+		height: $slideshow-height-small;
+
+		&.slideshow--medium {
+			height: $slideshow-height-medium;
+		}
+
+		&.slideshow--large {
+			height: $slideshow-height-large;
+		}
+	}
+
+	// Make sure slides fill full height
+	.slideshow__slide,
+	.slick-list,
+	.slick-track {
+		height: 100%;
+	}
+
+	.slick-prev,
+	.slick-next {
+		top: 0;
+		height: 100%;
+		margin-top: 0;
+		width: 40px;
+	}
+
+	.slick-prev {
+		left: 0;
+	}
+
+	.slick-next {
+		right: 0;
+	}
+
+	.slick-dots {
+		bottom: $gutter;
+		text-align: center;
+		left: 50%;
+		transform: translateX(-50%);
+
+		// sass-lint:disable SelectorDepth
+		li button::before {
+			color: $color-slideshow-dots;
+		}
+	}
+}
+
+
+.video-is-playing .slick-dots {
+  // sass-lint:disable no-important
+  display: none !important;
+}
+
+// Pause button (focusable by keyboard only)
+.slideshow__pause:focus {
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  color: $color-btn-primary-text;
+  background-color: $color-btn-primary;
+  padding: $gutter / 2;
+  z-index: $z-index-skip-to-content;
+  transition: none;
+
+  .video-is-playing & {
+    display: none;
+  }
+}
+
+.slideshow__pause-stop {
+  display: block;
+
+  .is-paused & {
+    display: none;
+  }
+}
+
+.slideshow__pause-play {
+  display: none;
+
+  .is-paused & {
+    display: block;
+  }
+}
+
+/*================ General slide styles ================*/
+.slideshow__slide {
+  position: relative;
+  overflow: hidden;
+}
+
+.slideshow__link {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &:active,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.slideshow__overlay {
+  @include overlay($z-index-slideshow-text);
+}
+
+
+/*================ Slide images ================*/
+.slideshow__image {
+  transition: $transition-image-slideshow;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+  z-index: $z-index-slideshow-image;
+
+  .slick-initialized &,
+  .no-js & {
+    opacity: 1;
+  }
+
+  .slideshow__slide--background-video & {
+    opacity: 0;
+  }
+
+  .no-autoplay & {
+    opacity: 1;
+  }
+}
+
+// z-index stacking issues in oldIE
+.ie9 {
+  .slideshow__slide {
+    // sass-lint:disable no-important
+    z-index: 1 !important;
+  }
+
+  .slick-dots {
+    z-index: 2;
+  }
+}
+
+
+/*================ Slide text ================*/
+.slideshow__text-wrap {
+  height: 100%;
+
+  .slideshow__link & {
+    cursor: inherit;
+  }
+
+  .slideshow__slide--has-background-video & {
+    padding-top: $gutter * 3;
+  }
+
+  .video-is-playing & {
+    display: none;
+  }
+
+  .slideshow__slide.video-is-paused & {
+    display: none;
+  }
+}
+
+.slideshow__text-content {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  @include transform(translateY(-40%));
+  opacity: 0;
+  transition: $transition-text-slideshow;
+  transition-delay: 0.3s;
+  z-index: $z-index-slideshow-text;
+
+  .slick-active &,
+  .no-js & {
+    @include transform(translateY(-50%));
+    opacity: 1;
+  }
+
+  &::after {
+    content: '';
+    @include spinner(40px, $slideshow-loader);
+    @include animation(spin 0.65s infinite linear);
+    opacity: 1;
+    transition: all 1s cubic-bezier(0.29, 0.63, 0.44, 1);
+    bottom: -$gutter;
+    left: 50%;
+  }
+
+  .slick-initialized &,
+  .no-js & {
+    &::after {
+      opacity: 0;
+      visibility: hidden;
+      content: none;
+    }
+  }
+}
+
+.slideshow__title {
+  color: $color-overlay-title-text;
+}
+
+.slideshow__subtitle {
+  display: block;
+  color: $color-overlay-title-text;
+}
+
+
+/*================ Video styles ================*/
+.slideshow__slide--has-background-video::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-index-slideshow-video;
+}
+
+.slideshow__video {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: $z-index-slideshow-video;
+}
+
+// Background video
+.slideshow__video--background {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in;
+
+  .autoplay &.video-is-loaded {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+// Place invisible element over video to prevent clicks
+.slideshow__slide--background-video::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-index-slideshow-video;
+}
+
+.slideshow__video--chrome {
+  display: none;
+  opacity: 0;
+  visibility: none;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease-in;
+
+  // YouTube video will not load if iframe is display: none
+  .ie9 & {
+    display: block;
+  }
+
+  .slideshow__slide.video-is-playing &,
+  .slideshow__slide.video-is-paused & {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+
+/*================ Video control buttons ================*/
+.slideshow__video-control {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  padding: 5px;
+  z-index: $z-index-slideshow-controls;
+  transition: all 0.1s ease-out;
+
+  &:hover,
+  &:focus {
+    opacity: 0.7;
+  }
+}
+
+// Video loader shown when initializing
+.video-loader {
+  @include spinner(40px, $slideshow-loader);
+  @include animation(spin 0.65s infinite linear);
+  transition: all 0.1s ease-out 0.5s;
+  z-index: $z-index-slideshow-controls;
+  top: 50%;
+  left: 50%;
+
+  .ie9 &,
+  .video-is-loaded &,
+  .video-is-playing &,
+  .video-is-paused &,
+  .autoplay &,
+  .no-autoplay & {
+    content: none;
+    display: none;
+  }
+
+  .video-is-loading &,
+  .autoplay .video-is-loading &,
+  .no-autoplay .video-is-loading & {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.slideshow__video-control--play-wrapper {
+  height: 30px;
+
+  @include media-query($medium-up) {
+    height: 45px;
+  }
+}
+
+@include media-query($medium-up) {
+  .slideshow__video-control--play-wrapper--push {
+    margin-top: $grid-gutter;
+  }
+}
+
+.slideshow__video-control--play {
+  opacity: 0;
+  color: $color-overlay-title-text;
+  position: relative;
+  margin: 0 auto;
+
+  .slideshow__video--background {
+    top: 50%;
+    @include transform(translateY(-50%));
+  }
+
+  .video-is-loaded & {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .video-is-loading &,
+  .video-is-playing &,
+  .slideshow__slide.video-is-paused & {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .icon {
+    width: 42px;
+    height: 100%;
+
+    @include media-query($medium-up) {
+      width: 65px;
+    }
+  }
+}
+
+.slideshow__video-control--close {
+  top: 10px;
+  right: 10px;
+  background-color: $color-slideshow-close-bg;
+  color: $color-slideshow-close-text;
+
+  .video-is-playing &,
+  .slideshow__slide.video-is-paused & {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+}

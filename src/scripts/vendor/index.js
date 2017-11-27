@@ -1,3 +1,3 @@
 import './jquery'
 import './modernizr.min'
-import './slick'
+import './slick.min'
