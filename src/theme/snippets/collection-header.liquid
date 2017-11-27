@@ -1,5 +1,5 @@
 {% if section.settings.show_collection_image and collection.image %}
-	<section class="collection-header hero is-light" style="background-image: url({{ collection.image | img_url: '1024x300', crop: 'top' }});">
+	<section class="collection-header hero is-dark" style="background-image: url({{ collection.image | img_url: '1024x300', crop: 'top' }});">
       <div class="hero-body">
         <div class="container has-text-centered">
         	<h1 class="title">{{ collection.title }}</h1>
@@ -8,7 +8,7 @@
       </div>
     </section>
 {% else %}
-	<section class="collection-header hero is-danger is-bold">
+	<section class="collection-header hero is-dark">
       <div class="hero-body">
         <div class="container has-text-centered">
         	<h1 class="title">{{ collection.title }}</h1>

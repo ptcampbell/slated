@@ -3,5 +3,7 @@
 		"**/node_modules": true,
 		"**/bower_components": true,
 		"**/deploy": true
-	}
+	},
+	"editor.detectIndentation": true,
+	"editor.tabSize": 4
 }

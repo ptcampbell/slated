@@ -1,9 +1,9 @@
 {% if section.settings.tags_enable or section.settings.sort_enable %}
   
   <div class="container">
-    <div class="columns">
+    <div class="columns is-mobile">
         {% if section.settings.tags_enable %}
-            <div class="column is-one-third">
+            <div class="column is-one-third-tablet is-half-mobile">
               <span class="select">
                 <label for="SortTags" class="is-hidden">{{ 'collections.filters.title_tags' | t }}</label>
                 <select class="select" name="SortTags" id="SortTags">
@@ -30,14 +30,14 @@
             </div>
         {% endif %}
 
-        <div class="column is-one-third has-text-centered">
+        <div class="column is-one-third has-text-centered is-hidden-mobile">
           <p class="filter-product-count has-text-grey-light">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</span></p>
         </div>
 
         {% if section.settings.sort_enable %}
           
             {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-            <div class="column is-one-third has-text-right">
+            <div class="column is-one-third-tablet is-half-mobile has-text-right">
               <span class="select">
                 <label for="SortBy" class="is-hidden">{{ 'collections.sorting.title' | t }}</label>
                 <select name="SortBy" id="SortBy" class="select">

@@ -1,35 +1,33 @@
-<div class="pagination section is-paddingless">
-  <div class="container">
-    <div class="tabs is-fullwidth">
-      <ul>
-        <li class="is-one-third has-text-centered">
-            {% unless paginate.previous.is_link %}
-              <p class="has-text-grey-light">
-                {{ 'general.pagination.previous' | t }}
-              </p>
-            {% else %}
-              <a href="{{ paginate.previous.url }}">
-                {{ 'general.pagination.previous' | t }}
-              </a>
-            {% endunless %}
-        </li>
-        <li class="is-one-third has-text-centered">
-          <div class="pagination-count">
-            {{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}
-          </div>
-        </li>
-      <li class="is-one-third has-text-centered">
-            {% unless paginate.next.is_link %}
-              <p class="has-text-grey-light">
-                {{ 'general.pagination.next' | t }}
-              </p>
-            {% else %}
-              <a href="{{ paginate.next.url }}">
-                {{ 'general.pagination.next' | t }}
-              </a>
-            {% endunless %}
-        </li>
-      </ul>
+<div class="pagination-snippet">
+  <nav class="level">
+    <div class="level-start">
+      {% unless paginate.previous.is_link %}
+        <p class="has-text-grey-light">
+          {{ 'general.pagination.previous' | t }}
+        </p>
+      {% else %}
+        <p>
+          <a href="{{ paginate.previous.url }}">
+            {{ 'general.pagination.previous' | t }}
+          </a>
+        </p>
+      {% endunless %}
     </div>
-  </div>
+    <div class="level-item">
+      <div class="pagination-count">
+        {{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}
+      </div>
+    </div>
+    <div class="level-end has-text-right">
+      {% unless paginate.next.is_link %}
+        <p class="has-text-grey-light">
+          {{ 'general.pagination.next' | t }}
+        </p>
+      {% else %}
+        <a href="{{ paginate.next.url }}">
+          {{ 'general.pagination.next' | t }}
+        </a>
+      {% endunless %}
+    </div>
+  </nav>
 </div>

@@ -10,8 +10,8 @@
  * ------------------------------------*/
 
 .collection-filters {
-	padding-top:1.5rem;
-	padding-bottom:1.5rem;
+	padding-top:1rem;
+	padding-bottom:1rem;
 
 	.filter-product-count {
 		padding-top: 0.4em;
@@ -30,5 +30,10 @@
  *   Pagination
  * ------------------------------------*/
 
-.pagination {
+.pagination-snippet {
+	padding-top:3rem;
+
+	.pagination-count {
+		margin:0 1em;
+	}
 }
