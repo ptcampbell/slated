@@ -17,7 +17,7 @@ $(document).ready(function() {
 		tableWrapperClass: 'rte__table-wrapper',
 	});
 
-	// Target iframes to make them responsive
+	// target iframes to make them responsive
 	var iframeSelectors =
 		'.rte iframe[src*="youtube.com/embed"],' +
 		'.rte iframe[src*="player.vimeo"]';
@@ -27,8 +27,22 @@ $(document).ready(function() {
 		iframeWrapperClass: 'rte__video-wrapper'
 	});
 
-	// Apply a specific class to the html element for browser support of cookies.
+	// apply a specific class to the html element for browser support of cookies
 	if (slate.cart.cookiesEnabled()) {
 		document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
 	}
+	
+	// hamburger menu
+	var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+	if ($navbarBurgers.length > 0) {
+		$navbarBurgers.forEach(function ($el) {
+			$el.addEventListener('click', function () {
+				var target = $el.dataset.target;
+				var $target = document.getElementById(target);
+				$el.classList.toggle('is-active');
+				$target.classList.toggle('is-active');
+			});
+		});
+	}
+
 });
