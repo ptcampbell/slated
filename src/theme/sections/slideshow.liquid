@@ -56,7 +56,7 @@
 				</div>
 			  </div>
 			{% else %}
-			  <div class="slideshow__image box ratio-container lazyload{% unless forloop.first == true %} lazypreload{% endunless %} js"
+			  <div class="slideshow__image lazyload{% unless forloop.first == true %} lazypreload{% endunless %} js"
 				   data-bgset="{% include 'bgset', image: block.settings.image %}"
 				   data-sizes="auto"
 				   data-parent-fit="cover"
@@ -74,16 +74,16 @@
 				{% endif %}
 			  </div>
 			</noscript>
-			<div class="slideshow__text-wrap{% if block.settings.title != blank or block.settings.subheading != blank %} slideshow__overlay{% endif %}">
-			  <div class="slideshow__text-content">
-				<div class="page-width">
+			<div class="slideshow__text-wrap{% if block.settings.title != blank or block.settings.subheading != blank %} slideshow__overlay{% endif %} hero is-dark">
+			  <div class="slideshow__text-content hero-body">
+				<div class="container">
 				  {% unless block.settings.title == blank %}
-					<h2 class="h1 mega-title slideshow__title{% if settings.link != blank %} slideshow__title--has-link{% endif %}{% if section.settings.text_size == 'large' %} mega-title--large{% endif %}">
+					<h2 class="title{% if settings.link != blank %} has-link{% endif %}{% if section.settings.text_size == 'large' %} is-large{% endif %}">
 					  {{ block.settings.title | escape }}
 					</h2>
 				  {% endunless %}
 				  {% unless block.settings.subheading == blank %}
-					<span class="mega-subtitle slideshow__subtitle{% if section.settings.text_size == 'large' %} mega-subtitle--large{% endif %}">
+					<span class="subtitle{% if section.settings.text_size == 'large' %}is-large{% endif %}">
 					  {{ block.settings.subheading | escape }}
 					</span>
 				  {% endunless %}
@@ -92,7 +92,7 @@
 					  <div class="slideshow__video-control--play-wrapper{% if block.settings.title != blank or block.settings.subheading != blank %} slideshow__video-control--play-wrapper--push{% endif %}">
 						<button type="button" class="text-link slideshow__video-control slideshow__video-control--play" data-controls="SlideshowVideo-{{ block.id }}">
 						  {% include 'icon-play-video' %}
-						  <span class="icon__fallback-text">{{ 'sections.slideshow.play_video' | t }}</span>
+						  <span class="is-hidden">{{ 'sections.slideshow.play_video' | t }}</span>
 						</button>
 					  </div>
 					{% endunless %}
