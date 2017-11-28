@@ -22,6 +22,7 @@ gulp.task('watch', done => {
   gulp.watch(config.src.styles + '/**/*', gulp.series('styles', reload))
   gulp.watch(config.src.scripts + '/**/*', gulp.series('scripts', reload))
   gulp.watch(config.src.images, gulp.series('images', reload))
+  gulp.watch(config.src.assets, gulp.series('assets', reload))
   gulp.watch(config.src.shopify, gulp.series('shopify', reload))
   done()
 })

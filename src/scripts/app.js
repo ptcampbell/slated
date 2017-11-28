@@ -19,7 +19,7 @@ import './slate/variants'
  *   Theme sections
  * ------------------*/
 
-import './sections/slideshow-section'
+import './sections/slideshow'
 import './sections/product'
 
 /*

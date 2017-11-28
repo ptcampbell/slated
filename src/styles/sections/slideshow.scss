@@ -13,36 +13,27 @@ $z-index-slideshow-controls: 4;
 $color-slideshow-close-bg: #fff;
 $color-slideshow-close-text: #000;
 
+$color-slideshow-arrows: #000;
+$color-slideshow-dots: #fff;
+
+$color-overlay-title-text:#000;
+
+$transition-text-slideshow: all 0.6s cubic-bezier(0.44, 0.13, 0.48, 0.87);
+$transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
+
 .slideshow-wrapper {
   position: relative;
+
 }
 
 .slideshow {
   	overflow: hidden;
 	height: $slideshow-height-small - 150;
-  	margin-bottom: 0;
+	  margin-bottom: 0;
+	  
+	background-color:whitesmoke;
 
-	&.slideshow--medium {
-	height: $slideshow-height-medium - 150;
-	}
-
-	&.slideshow--large {
-	height: $slideshow-height-large - 200;
-	}
-
-	@include media-query($medium-up) {
-		height: $slideshow-height-small;
-
-		&.slideshow--medium {
-			height: $slideshow-height-medium;
-		}
-
-		&.slideshow--large {
-			height: $slideshow-height-large;
-		}
-	}
-
-	// Make sure slides fill full height
+	// make sure slides fill full height
 	.slideshow__slide,
 	.slick-list,
 	.slick-track {
@@ -66,7 +57,7 @@ $color-slideshow-close-text: #000;
 	}
 
 	.slick-dots {
-		bottom: $gutter;
+		bottom: 2em;
 		text-align: center;
 		left: 50%;
 		transform: translateX(-50%);
@@ -90,10 +81,10 @@ $color-slideshow-close-text: #000;
   width: auto;
   height: auto;
   margin: 0;
-  color: $color-btn-primary-text;
-  background-color: $color-btn-primary;
-  padding: $gutter / 2;
-  z-index: $z-index-skip-to-content;
+//  color: $color-btn-primary-text;
+  //background-color: $color-btn-primary;
+  //padding: 2em / 2;
+  //z-index: $z-index-skip-to-content;
   transition: none;
 
   .video-is-playing & {
@@ -192,7 +183,7 @@ $color-slideshow-close-text: #000;
   }
 
   .slideshow__slide--has-background-video & {
-    padding-top: $gutter * 3;
+    padding-top: 2em * 3;
   }
 
   .video-is-playing & {
@@ -209,7 +200,7 @@ $color-slideshow-close-text: #000;
   position: absolute;
   width: 100%;
   top: 50%;
-  @include transform(translateY(-40%));
+  transform: translate(0,-50%);
   opacity: 0;
   transition: $transition-text-slideshow;
   transition-delay: 0.3s;
@@ -217,17 +208,17 @@ $color-slideshow-close-text: #000;
 
   .slick-active &,
   .no-js & {
-    @include transform(translateY(-50%));
+    transform: translate(0,-50%);
     opacity: 1;
   }
 
   &::after {
     content: '';
-    @include spinner(40px, $slideshow-loader);
-    @include animation(spin 0.65s infinite linear);
+    //@include spinner(40px, $slideshow-loader);
+    //@include animation(spin 0.65s infinite linear);
     opacity: 1;
     transition: all 1s cubic-bezier(0.29, 0.63, 0.44, 1);
-    bottom: -$gutter;
+    bottom: -2em;
     left: 50%;
   }
 
@@ -336,8 +327,8 @@ $color-slideshow-close-text: #000;
 
 // Video loader shown when initializing
 .video-loader {
-  @include spinner(40px, $slideshow-loader);
-  @include animation(spin 0.65s infinite linear);
+  //@include spinner(40px, $slideshow-loader);
+  //@include animation(spin 0.65s infinite linear);
   transition: all 0.1s ease-out 0.5s;
   z-index: $z-index-slideshow-controls;
   top: 50%;
@@ -365,16 +356,16 @@ $color-slideshow-close-text: #000;
 .slideshow__video-control--play-wrapper {
   height: 30px;
 
-  @include media-query($medium-up) {
-    height: 45px;
-  }
+//   @include media-query($medium-up) {
+//     height: 45px;
+//   }
 }
 
-@include media-query($medium-up) {
-  .slideshow__video-control--play-wrapper--push {
-    margin-top: $grid-gutter;
-  }
-}
+// @include media-query($medium-up) {
+//   .slideshow__video-control--play-wrapper--push {
+//     margin-top: $grid-gutter;
+//   }
+// }
 
 .slideshow__video-control--play {
   opacity: 0;
@@ -384,7 +375,7 @@ $color-slideshow-close-text: #000;
 
   .slideshow__video--background {
     top: 50%;
-    @include transform(translateY(-50%));
+    //@include transform(translateY(-50%));
   }
 
   .video-is-loaded & {
@@ -405,9 +396,9 @@ $color-slideshow-close-text: #000;
     width: 42px;
     height: 100%;
 
-    @include media-query($medium-up) {
-      width: 65px;
-    }
+    // @include media-query($medium-up) {
+    //   width: 65px;
+    // }
   }
 }
 

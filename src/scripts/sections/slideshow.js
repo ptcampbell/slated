@@ -6,7 +6,7 @@ theme.SlideshowSection = (function() {
 		var sectionId = $container.attr('data-section-id');
 		var slideshow = this.slideshow = '#Slideshow-' + sectionId;
 
-		$('.slideshow__video', slideshow).each(function() {
+		$('.slideshow-video', slideshow).each(function() {
 			var $el = $(this);
 			theme.SlideshowVideo.init($el);
 			theme.SlideshowVideo.loadVideo($el.attr('id'));
@@ -46,10 +46,10 @@ theme.Slideshow = (function() {
 		wrapper: 'slideshow-wrapper',
 		slideshow: 'slideshow',
 		currentSlide: 'slick-current',
-		video: 'slideshow__video',
-		videoBackground: 'slideshow__video--background',
-		closeVideoBtn: 'slideshow__video-control--close',
-		pauseButton: 'slideshow__pause',
+		video: 'slideshow-video',
+		videoBackground: 'slideshow-video-bg',
+		closeVideoBtn: 'slideshow-video-control-close',
+		pauseButton: 'slideshow-pause',
 		isPaused: 'is-paused'
 	};
 
@@ -224,10 +224,10 @@ theme.SlideshowVideo = (function() {
 		slide: 'slideshow__slide',
 		slideBackgroundVideo: 'slideshow__slide--background-video',
 		slideDots: 'slick-dots',
-		videoChrome: 'slideshow__video--chrome',
-		videoBackground: 'slideshow__video--background',
-		playVideoBtn: 'slideshow__video-control--play',
-		closeVideoBtn: 'slideshow__video-control--close',
+		videoChrome: 'slideshow-video--chrome',
+		videoBackground: 'slideshow-video--background',
+		playVideoBtn: 'slideshow-video-control--play',
+		closeVideoBtn: 'slideshow-video-control--close',
 		currentSlide: 'slick-current',
 		slickClone: 'slick-cloned',
 		supportsAutoplay: 'autoplay',
