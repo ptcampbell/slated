@@ -1,7 +1,7 @@
-<div class="page-width" data-section-id="{{ section.id }}" data-section-type="quotes">
+<div class="container" data-section-id="{{ section.id }}" data-section-type="quotes">
   {% if section.settings.title != blank %}
-    <div class="section-header text-center">
-      <h2>{{ section.settings.title | escape }}</h2>
+    <div class="has-text-centered">
+      <h2 class="title">{{ section.settings.title | escape }}</h2>
     </div>
   {% endif %}
 

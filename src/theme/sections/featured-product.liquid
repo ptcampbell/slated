@@ -8,6 +8,7 @@
 {% endif %}
 
 <div data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
+
   <meta itemprop="name" content="{{ product.title }}">
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
   <meta itemprop="image" content="{{ featured_image | img_url: '800x' }}">
@@ -35,6 +36,7 @@
   {% endif %}
 
   <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
     <meta itemprop="priceCurrency" content="{{ shop.currency }}">
     <meta itemprop="price" content="{{ product.price | divided_by: 100.00 }}">
     <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
@@ -46,7 +48,6 @@
             <label for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
               {{ option.name }}
             </label>
-
             <select
               id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
               data-single-option-selector
@@ -110,7 +111,7 @@
 
   </div>
 
-  <div class="rte">
+  <div class="content">
     {{ product.description }}
   </div>
 
