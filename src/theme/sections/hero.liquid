@@ -1,55 +1,29 @@
-{% if section.settings.image != blank %}
-  <style>
-    .hero--{{ section.id }} {
-      background-position: {{ section.settings.alignment }};
-    }
-
-    @media screen and (max-width: 600px) {
-      .hero--{{ section.id }} {
-        background-image: url('{{ section.settings.image | img_url: '600x600' }}');
-      }
-    }
-
-    @media screen and (min-width: 601px) and (max-width: 1024px) {
-      .hero--{{ section.id }} {
-        background-image: url('{{ section.settings.image | img_url: '1024x1024' }}');
-      }
-    }
-
-    @media screen and (min-width: 1025px) and (max-width: 1600px) {
-      .hero--{{ section.id }} {
-        background-image: url('{{ section.settings.image | img_url: '1600x1600' }}');
-      }
-    }
-
-    @media screen and (min-width: 1601px) {
-      .hero--{{ section.id }} {
-        background-image: url('{{ section.settings.image | img_url: '2048x2048' }}');
-      }
-    }
-  </style>
-{% endif %}
-
 <div class="section-hero hero hero-{{ section.id }} is-{{ section.settings.hero_size }} has-text-{{ section.settings.alignment_text }} {% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %}">
   {% if section.settings.image == blank %}
-    <div class="placeholder-background">
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
+	<div class="placeholder-background">
+	  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+	</div>
   {% endif %}
+  	<div class="hero-background-image lazyload"
+		data-bgset="{% include 'bgset', image: section.settings.image %}"
+		data-sizes="auto"
+		data-parent-fit="cover"
+		style="background-position:{{ section.settings.alignment }}; background-image: url('{{ section.settings.image | img_url: '300x300' }});">
+	</div>
   <div class="hero-body">
-    <div class="container">
-      {% if section.settings.title != blank %}
-        <h2 class="title{% if section.settings.text_size == 'large' %} is-large{% endif %}">{{ section.settings.title | escape }}</h2>
-      {% endif %}
-      {% if section.settings.text != blank %}
-        <div class="hero-description {% if section.settings.text_size == 'large' %} is-large{% endif %}">{{ section.settings.text }}</div>
-      {% endif %}
-      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-        <a href="{{ section.settings.button_link }}" class="button is-primary">
-          {{ section.settings.button_label }}
-        </a>
-      {% endif %}
-    </div>
+	<div class="container">
+	  {% if section.settings.title != blank %}
+		<h2 class="title">{{ section.settings.title | escape }}</h2>
+	  {% endif %}
+	  {% if section.settings.text != blank %}
+		<div class="hero-description">{{ section.settings.text }}</div>
+	  {% endif %}
+	  {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+		<a href="{{ section.settings.button_link }}" class="button is-primary">
+		  {{ section.settings.button_label }}
+		</a>
+	  {% endif %}
+	</div>
   </div>
 </div>
 
@@ -58,119 +32,123 @@
   "name": "Image with text overlay",
   "class": "index-section",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "select",
-      "id": "alignment",
-      "label": "Image alignment",
-      "default": "center",
-      "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "center",
-          "label": "Middle"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "alignment_text",
-      "label": "Text alignment",
-      "default": "centered",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "centered",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Image with text overlay"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
-    },
-    {
-      "type": "select",
-      "id": "hero_size",
-      "label": "Section height",
-      "default": "medium",
-      "options": [
-        {
-          "label": "Small",
-          "value": "small"
-        },
-        {
-          "label": "Medium",
-          "value": "medium"
-        },
-        {
-          "label": "Large",
-          "value": "large"
-        },
-        {
-          "label": "Full height",
-          "value": "fullheight"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "text_size",
-      "label": "Text size",
-      "default": "medium",
-      "options": [
-        {
-          "label": "Medium",
-          "value": "medium"
-        },
-        {
-          "label": "Large",
-          "value": "large"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    }
+	{
+	  "type": "image_picker",
+	  "id": "image",
+	  "label": "Image"
+	},
+	{
+	  "type": "select",
+	  "id": "alignment",
+	  "label": "Image alignment",
+	  "default": "center",
+	  "options": [
+		{
+		  "value": "top",
+		  "label": "Top"
+		},
+		{
+		  "value": "center",
+		  "label": "Middle"
+		},
+		{
+		  "value": "bottom",
+		  "label": "Bottom"
+		}
+	  ]
+	},
+	{
+	  "type": "select",
+	  "id": "alignment_text",
+	  "label": "Text alignment",
+	  "default": "centered",
+	  "options": [
+		{
+		  "value": "left",
+		  "label": "Left"
+		},
+		{
+		  "value": "centered",
+		  "label": "Center"
+		},
+		{
+		  "value": "right",
+		  "label": "Right"
+		}
+	  ]
+	},
+	{
+	  "type": "text",
+	  "id": "title",
+	  "label": "Heading",
+	  "default": "Image with text overlay"
+	},
+	{
+	  "type": "richtext",
+	  "id": "text",
+	  "label": "Text",
+	  "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+	},
+	{
+	  "type": "select",
+	  "id": "hero_size",
+	  "label": "Section height",
+	  "default": "medium",
+	  "options": [
+		{
+		  "label": "Small",
+		  "value": "small"
+		},
+		{
+		  "label": "Medium",
+		  "value": "medium"
+		},
+		{
+		  "label": "Large",
+		  "value": "large"
+		},
+		{
+		  "label": "Full height",
+		  "value": "fullheight"
+		}
+	  ]
+	},
+	{
+	  "type": "select",
+	  "id": "text_size",
+	  "label": "Text size",
+	  "default": "medium",
+	  "options": [
+		{
+		  "label": "Small",
+		  "value": "small"
+		},
+		{
+		  "label": "Medium",
+		  "value": "medium"
+		},
+		{
+		  "label": "Large",
+		  "value": "large"
+		}
+	  ]
+	},
+	{
+	  "type": "text",
+	  "id": "button_label",
+	  "label": "Button label"
+	},
+	{
+	  "type": "url",
+	  "id": "button_link",
+	  "label": "Button link"
+	}
   ],
   "presets": [
-    {
-      "name": "Image with text overlay",
-      "category": "Image"
-    }
+	{
+	  "name": "Image with text overlay",
+	  "category": "Image"
+	}
   ]
 }
 {% endschema %}
