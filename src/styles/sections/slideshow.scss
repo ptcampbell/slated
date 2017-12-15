@@ -79,22 +79,9 @@ $transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 						opacity: 1;
 					}
 				}
-
-				&:before {
-					position: absolute;
-					top: 0;
-					left: 0;
-					content: $slick-dot-character;
-					width: 20px;
-					height: 20px;
-					font-size: 40px;
-					line-height: 20px;
-					text-align: center;
-					color: $color-image-overlay-text;
-					opacity: 0.25;
-				}
-
 			}
+
+		}
 
 		&.slick-active button:before {
 			color: $color-image-overlay-text;
@@ -102,8 +89,6 @@ $transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 		}
 	}
 }
-}
-
 
 .video-is-playing .slick-dots {
   display: none !important;
