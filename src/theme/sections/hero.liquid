@@ -1,4 +1,4 @@
-<div class="section-hero hero hero-{{ section.id }} has-text-{{ section.settings.alignment_text }} {% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %}">
+<div class="section-hero hero hero-{{ section.id }} has-text-{{ section.settings.alignment_text }} is-{{section.settings.hero_size}}{% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %} ">
  	{% if section.settings.image == blank %}
 	<div class="placeholder-background">
 		{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -13,7 +13,7 @@
   	<div class="hero-body">
 		<div class="container">
 			{% if section.settings.title != blank %}
-				<h2 class="title {{ section.settings.hero_size }}">{{ section.settings.title | escape }}</h2>
+				<h2 class="title {% if section.settings.text_size == 'small' %} is-size-4{% endif %}{% if section.settings.text_size == 'large' %} is-size-2{% endif %}">{{ section.settings.title | escape }}</h2>
 			{% endif %}
 			{% if section.settings.text != blank %}
 				<div class="hero-description">{{ section.settings.text }}</div>
@@ -116,7 +116,7 @@
 	{
 	  "type": "select",
 	  "id": "text_size",
-	  "label": "Text size",
+	  "label": "Title text size",
 	  "default": "medium",
 	  "options": [
 		{
@@ -146,7 +146,7 @@
   ],
   "presets": [
 	{
-	  "name": "Image with text overlay",
+	  "name": "Hero",
 	  "category": "Image"
 	}
   ]
