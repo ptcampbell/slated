@@ -74,10 +74,12 @@ $transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 
 				&:hover, &:focus {
 					outline: none;
+
 					&:before {
 						opacity: 1;
 					}
 				}
+
 				&:before {
 					position: absolute;
 					top: 0;
@@ -91,7 +93,8 @@ $transition-image-slideshow: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 					color: $color-image-overlay-text;
 					opacity: 0.25;
 				}
-		}
+
+			}
 
 		&.slick-active button:before {
 			color: $color-image-overlay-text;
