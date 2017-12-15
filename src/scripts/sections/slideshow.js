@@ -60,7 +60,7 @@ theme.Slideshow = (function() {
 
 	this.settings = {
 		accessibility: true,
-		arrows: false,
+		arrows: true,
 		dots: true,
 		fade: true,
 		draggable: true,
@@ -642,7 +642,7 @@ theme.SlideshowVideo = (function() {
 			.addClass(classes.slideBackgroundVideo);
 
 		videos[playerId].status = 'background';
-			sizeBackgroundVideo($player);
+		sizeBackgroundVideo($player);
 	}
 
 	function initEvents() {

@@ -1,35 +1,35 @@
-<div class="section-hero hero hero-{{ section.id }} is-{{ section.settings.hero_size }} has-text-{{ section.settings.alignment_text }} {% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %}">
-  {% if section.settings.image == blank %}
+<div class="section-hero hero hero-{{ section.id }} has-text-{{ section.settings.alignment_text }} {% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %}">
+ 	{% if section.settings.image == blank %}
 	<div class="placeholder-background">
-	  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+		{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
 	</div>
-  {% endif %}
+  	{% endif %}
   	<div class="hero-background-image lazyload"
 		data-bgset="{% include 'bgset', image: section.settings.image %}"
 		data-sizes="auto"
 		data-parent-fit="cover"
 		style="background-position:{{ section.settings.alignment }}; background-image: url('{{ section.settings.image | img_url: '300x300' }});">
 	</div>
-  <div class="hero-body">
-	<div class="container">
-	  {% if section.settings.title != blank %}
-		<h2 class="title">{{ section.settings.title | escape }}</h2>
-	  {% endif %}
-	  {% if section.settings.text != blank %}
-		<div class="hero-description">{{ section.settings.text }}</div>
-	  {% endif %}
-	  {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-		<a href="{{ section.settings.button_link }}" class="button is-primary">
-		  {{ section.settings.button_label }}
-		</a>
-	  {% endif %}
+  	<div class="hero-body">
+		<div class="container">
+			{% if section.settings.title != blank %}
+				<h2 class="title {{ section.settings.hero_size }}">{{ section.settings.title | escape }}</h2>
+			{% endif %}
+			{% if section.settings.text != blank %}
+				<div class="hero-description">{{ section.settings.text }}</div>
+			{% endif %}
+			{% if section.settings.button_label != blank and section.settings.button_link != blank %}
+			<a href="{{ section.settings.button_link }}" class="button is-primary">
+				{{ section.settings.button_label }}
+			</a>
+			{% endif %}
+		</div>
 	</div>
-  </div>
 </div>
 
 {% schema %}
 {
-  "name": "Image with text overlay",
+  "name": "Hero",
   "class": "index-section",
   "settings": [
 	{
@@ -63,18 +63,18 @@
 	  "label": "Text alignment",
 	  "default": "centered",
 	  "options": [
-		{
-		  "value": "left",
-		  "label": "Left"
-		},
-		{
-		  "value": "centered",
-		  "label": "Center"
-		},
-		{
-		  "value": "right",
-		  "label": "Right"
-		}
+			{
+				"value": "left",
+				"label": "Left"
+			},
+			{
+				"value": "centered",
+				"label": "Center"
+			},
+			{
+				"value": "right",
+				"label": "Right"
+			}
 	  ]
 	},
 	{

@@ -1,7 +1,25 @@
-// theme settings
+/*
+ *   Image slides
+ * ------------------*/
+
 $color-text: #{"{{ settings.color_body_text }}"};
 $color-primary: #{"{{ settings.color_primary }}"};
+$color-sale-text: #{"{{settings.color_sale_text}}"};
+$color-borders: #{"{{settings.color_borders}}"};
+$color-image-overlay-text: #{"{{settings.color_image_overlay_text}}"};
+$color-image-overlay: #{"{{settings.color_image_overlay}}"};
+$color-button: #{"{{settings.color_button}}"};
+$color-button-text: #{"{{settings.color_button_text}}"};
+$color-small-button: #{"{{settings.color_small_button}}"};
+$color-small-button-text: #{"{{settings.color_small_button_text}}"};
+$color-text-field: #{"{{settings.color_text_field}}"};
+$color-text-field-text: #{"{{settings.color_text_field_text}}"};
+$color-overlay-opacity: #{"{{settings.image_overlay_opacity}}"};
 
-// set bulma defaults 
+
+/*
+ *   Bulma defaults
+ * ------------------*/
+
 $primary: #D51C3B;
 $link: #D51C3B;

@@ -31,3 +31,8 @@
 @import 'sections/collection-filter';
 @import 'sections/product-card-grid';
 @import 'sections/product-template';
+
+// hide shopify preview bar during development
+.shopify-preview-bar {
+	display:none!important;
+}
