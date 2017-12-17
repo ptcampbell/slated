@@ -11,7 +11,7 @@
 
   <div class="collection-filters section">
 	{% include 'collection-filters' %}
-  </div>  
+  </div>
 
   <div class="collection-loop section" id="Collection">
 	<div class="container">
@@ -30,11 +30,11 @@
 		  {%- assign grid_item_width = 'is-one-fifth-tablet is-half-mobile' -%}
 		  {%- assign image_size = '300x300' -%}
 		{% endcase %}
-		
+
 		<div class="columns is-mobile is-multiline">
 		  {% for product in collection.products %}
 			<div class="column {{ grid_item_width }}">
-			  {% include 'product-card-grid', grid_image_width: image_size %}
+				{% include 'product-card-grid', grid_image_width: image_size %}
 			</div>
 		  {% else %}
 			{% comment %}
@@ -72,13 +72,13 @@
 
 		{% if is_empty_collection %}
 			<p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
-		{% endif %}           
+		{% endif %}
 
 		{% if paginate.pages > 1 %}
 		{% include 'pagination' %}
-		{% endif %}  
+		{% endif %}
 		{% endpaginate %}
-		
+
 	</div>
   </div>
 </div>

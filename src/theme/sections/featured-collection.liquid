@@ -1,56 +1,98 @@
 <div class="container">
 
   {% if section.settings.title != blank %}
-    <h2 class="title has-text-centered">{{ section.settings.title | escape }}</h2>
+	<h2 class="title has-text-centered">{{ section.settings.title | escape }}</h2>
   {% endif %}
 
   {%- assign collection = collections[section.settings.collection] -%}
 
-  <div class="columns is-parent is-multiline">
+  {% case section.settings.grid %}
+  {% when '2' %}
+	{%- assign grid_item_width = 'is-half' -%}
+	{%- assign image_size = '500x500' -%}
+  {% when '3' %}
+	{%- assign grid_item_width = 'is-one-third-tablet is-half-mobile' -%}
+	{%- assign image_size = '500x500' -%}
+  {% when '4' %}
+	{%- assign grid_item_width = 'is-one-quarter-tablet is-half-mobile' -%}
+	{%- assign image_size = '300x300' -%}
+  {% when '5' %}
+	{%- assign grid_item_width = 'is-one-fifth-tablet is-half-mobile' -%}
+  {%- assign image_size = '300x300' -%}
+  {% endcase %}
 
-    {% for product in collection.products limit: 6 %}
+  <div class="columns is-mobile is-multiline">
 
-    {% else %}
-      {% for i in (1..6) %}
-        <div class="column is-one-quarter">
-          <a href="#">
-            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+	{% for product in collection.products limit: 6 %}
 
-            <p>
-              {{ 'homepage.onboarding.product_title' | t }}
-            </p>
-          </a>
-          <p>{{ 1999 | money }}</p>
-        </div>
-      {% endfor %}
-    {% endfor %}
+	<div class="column {{ grid_item_width }}">
+	  {% include 'product-card-grid', grid_image_width: image_size %}
+	</div>
+
+	{% else %}
+	  {% for i in (1..6) %}
+		<div class="column {{ grid_item_width }}">
+		  <a href="#">
+			{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+			{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+			<p>
+			  {{ 'homepage.onboarding.product_title' | t }}
+			</p>
+		  </a>
+		  <p>{{ 1999 | money }}</p>
+		</div>
+	  {% endfor %}
+	{% endfor %}
   </div>
 </div>
 
 {% schema %}
   {
-    "name": "Featured collection",
-    "class": "section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Heading",
-        "default": "Featured collection"
-      },
-      {
-        "id": "collection",
-        "type": "collection",
-        "label": "Collection"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Featured collection",
-        "category": "Collection"
-      }
-    ]
+	"name": "Featured collection",
+	"class": "section",
+	"settings": [
+	  {
+		"type": "text",
+		"id": "title",
+		"label": "Heading",
+		"default": "Featured collection"
+	  },
+	  {
+		"id": "collection",
+		"type": "collection",
+		"label": "Collection"
+	  },
+	  {
+		"type": "select",
+		"id": "grid",
+		"label": "Products per row (max)",
+		"default": "4",
+		"options": [
+		{
+		  "value": "2",
+		  "label": "2"
+		},
+		{
+		  "value": "3",
+		  "label": "3"
+		},
+		{
+		  "value": "4",
+		  "label": "4"
+		},
+		{
+		  "value": "5",
+		  "label": "5"
+		}
+		]
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Featured collection",
+		"category": "Collection"
+	  }
+	]
   }
 
 {% endschema %}
