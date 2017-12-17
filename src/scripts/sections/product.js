@@ -46,7 +46,7 @@ theme.Product = (function() {
 				return '<button class="thumbnail" style="background-image:url('+$(slick.$slides[index]).data('thumb')+')"></button>';
 			}
 		});
-		
+
 		this.$container = $(container);
 
 		// Stop parsing if we don't have the product json script tag when loading

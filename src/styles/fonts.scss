@@ -1,20 +1,33 @@
-@import 'vendor/materialdesignicons';
+// @import 'vendor/materialdesignicons';
 
-$system-fonts: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-$font-family--primary: 'Open Sans', sans-serif;
+// /*
+//   {% if settings.type_base_family contains 'Google' %}
+//   {% assign type_base_parts = settings.type_base_family | split: '_' %}
+//   {% assign type_base_name = type_base_parts[1] %}
+//   {% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+//   {% else %}
+//   {% assign base_family = settings.type_base_family %}
+//   {% endif %}
 
+//   {% if settings.type_header_family contains 'Google' %}
+//   {% assign type_header_parts = settings.type_header_family | split: '_' %}
+//   {% assign type_header_name = type_header_parts[1] %}
+//   {% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+//   {% assign header_weight = type_header_parts[2] | split: ',' %}
+//   {% else %}
+//   {% assign header_family = settings.type_header_family %}
+//   {% assign header_weight = 400 %}
+//   {% endif %}
+// */
 
-html {
-  font-family: $system-fonts;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+// html {
 
-  // load when ready - https://github.com/typekit/webfontloader
-  &.wf-active {
-    font-family: $font-family--primary;
-  }
-}
+//   // load when ready - https://github.com/typekit/webfontloader
+//   &.wf-active {
+//     font-family: unquote('{{ base_family }}');
+//   }
+// }
 
-body {
-  font-family: inherit;
-}
+// body {
+//   font-family: inherit;
+// }
