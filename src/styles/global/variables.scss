@@ -2,62 +2,42 @@
  *   Theme variables
  * ------------------------*/
 
-$color-text: unquote('{{ settings.color_body_text }}');
-$color-primary: unquote('{{ settings.color_primary }}');
-$color-sale-text: unquote('{{settings.color_sale_text}}');
-$color-borders: unquote('{{settings.color_borders}}');
-$color-image-overlay-text: unquote('{{settings.color_image_overlay_text}}');
-$color-image-overlay: unquote('{{settings.color_image_overlay}}');
-$color-button: unquote('{{settings.color_button}}');
-$color-button-text: unquote('{{settings.color_button_text}}');
-$color-small-button: unquote('{{settings.color_small_button}}');
-$color-small-button-text: unquote('{{settings.color_small_button_text}}');
-$color-text-field: unquote('{{settings.color_text_field}}');
-$color-text-field-text: unquote('{{settings.color_text_field_text}}');
+$color-text: unquote('{{ settings.color_body_text | color_to_rgb }}');
+$color-primary: unquote('{{ settings.color_primary | color_to_rgb }}');
+$color-sale-text: unquote('{{settings.color_sale_text | color_to_rgb}}');
+$color-borders: unquote('{{settings.color_borders | color_to_rgb}}');
+$color-image-overlay-text: unquote('{{settings.color_image_overlay_text | color_to_rgb}}');
+$color-image-overlay: unquote('{{settings.color_image_overlay | color_to_rgb}}');
+$color-button: unquote('{{settings.color_button | color_to_rgb}}');
+$color-button-text: unquote('{{settings.color_button_text | color_to_rgb}}');
+$color-small-button: unquote('{{settings.color_small_button | color_to_rgb}}');
+$color-small-button-text: unquote('{{settings.color_small_button_text | color_to_rgb}}');
+$color-text-field: unquote('{{settings.color_text_field | color_to_rgb}}');
+$color-text-field-text: unquote('{{settings.color_text_field_text | color_to_rgb}}');
 $color-overlay-opacity: unquote('{{settings.image_overlay_opacity}}');
 
 /*
-// Get font-family of Google font
-{% if settings.type_base_family contains 'Google' %}
-{% assign type_base_parts = settings.type_base_family | split: '_' %}
-{% assign type_base_name = type_base_parts[1] %}
-{% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-{% else %}
-{% assign base_family = settings.type_base_family %}
-{% endif %}
-
-{% if settings.type_header_family contains 'Google' %}
-{% assign type_header_parts = settings.type_header_family | split: '_' %}
-{% assign type_header_name = type_header_parts[1] %}
-{% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-{% assign header_weight = type_header_parts[2] | split: ',' %}
-{% else %}
-{% assign header_family = settings.type_header_family %}
-{% assign header_weight = 400 %}
-{% endif %}
-*/
-
-$family-primary: unquote('{{ base_family }}');
-
-html {
-	// load when ready - https://github.com/typekit/webfontloader
-	&.wf-active {
-		font-family: unquote('{{ base_family }}');
-	}
-}
-
-body {
-	font-family: unquote('{{ base_family }}');
-	-webkit-font-smoothing: antialiased;
-
-	.title {
-		font-family: unquote('{{ header_family }}');
-	}
-}
-
-/*
- *   Bulma defaults
+ *   Set colors
  * ------------------*/
 
-$primary: #D51C3B;
+$primary: #D51C3B; // can't use liquid variables to override bulma defaults (must be a color)
 $link: #D51C3B;
+
+a {
+	color:unquote('{{ settings.color_primary | color_to_rgb }}')!important;
+}
+
+.has-text-primary {
+	color: unquote('{{ settings.color_primary | color_to_rgb }}')!important;
+}
+
+a.has-text-primary:hover, a.has-text-primary:focus {
+	color: unquote('{{ settings.color_primary | color_to_rgb }}')!important;
+}
+
+.has-text-link {
+	color: unquote('{{settings.color_small_button_text | color_to_rgb}}')!important;
+}
+a.has-text-link:hover, a.has-text-link:focus {
+	color: unquote('{{settings.color_small_button_text | color_to_rgb}}')!important;
+}

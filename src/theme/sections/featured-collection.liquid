@@ -1,49 +1,49 @@
 <div class="container">
 
-  {% if section.settings.title != blank %}
+	{% if section.settings.title != blank %}
 	<h2 class="title has-text-centered">{{ section.settings.title | escape }}</h2>
-  {% endif %}
+	{% endif %}
 
-  {%- assign collection = collections[section.settings.collection] -%}
+	{%- assign collection = collections[section.settings.collection] -%}
 
-  {% case section.settings.grid %}
-  {% when '2' %}
+	{% case section.settings.grid %}
+	{% when '2' %}
 	{%- assign grid_item_width = 'is-half' -%}
 	{%- assign image_size = '500x500' -%}
-  {% when '3' %}
+	{% when '3' %}
 	{%- assign grid_item_width = 'is-one-third-tablet is-half-mobile' -%}
 	{%- assign image_size = '500x500' -%}
-  {% when '4' %}
+	{% when '4' %}
 	{%- assign grid_item_width = 'is-one-quarter-tablet is-half-mobile' -%}
 	{%- assign image_size = '300x300' -%}
-  {% when '5' %}
+	{% when '5' %}
 	{%- assign grid_item_width = 'is-one-fifth-tablet is-half-mobile' -%}
-  {%- assign image_size = '300x300' -%}
-  {% endcase %}
+	{%- assign image_size = '300x300' -%}
+	{% endcase %}
 
-  <div class="columns is-mobile is-multiline">
+	<div class="columns is-mobile is-multiline">
 
 	{% for product in collection.products limit: 6 %}
 
 	<div class="column {{ grid_item_width }}">
-	  {% include 'product-card-grid', grid_image_width: image_size %}
+		{% include 'product-card-grid', grid_image_width: image_size %}
 	</div>
 
 	{% else %}
-	  {% for i in (1..6) %}
+		{% for i in (1..6) %}
 		<div class="column {{ grid_item_width }}">
-		  <a href="#">
+			<a href="#">
 			{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
 			{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
 			<p>
-			  {{ 'homepage.onboarding.product_title' | t }}
+				{{ 'homepage.onboarding.product_title' | t }}
 			</p>
-		  </a>
-		  <p>{{ 1999 | money }}</p>
+			</a>
+			<p>{{ 1999 | money }}</p>
 		</div>
-	  {% endfor %}
+		{% endfor %}
 	{% endfor %}
-  </div>
+	</div>
 </div>
 
 {% schema %}

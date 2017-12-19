@@ -32,10 +32,12 @@
     {% endif %}
 
     {% include 'social-meta-tags' %}
-    {% include 'google-fonts' %}
+    {% include 'google-embed' %}
 
     {{ 'vendor.css' | asset_url | stylesheet_tag }}
     {{ 'main.scss' | asset_url | stylesheet_tag }}
+
+    {% include 'google-specify' %}
 
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');

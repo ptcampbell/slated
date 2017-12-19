@@ -1,0 +1,92 @@
+<div class="page-width" data-section-id="{{ section.id }}" data-section-type="features">
+	{% if section.settings.title != blank %}
+		<div class="section-header text-center">
+			<h3>{{ section.settings.title | escape }}</h3>
+		</div>
+	{% endif %}
+
+	{% if section.blocks.size > 0 %}
+		<div class="features-wrapper">
+			<div class="features-slider" id="Features-{{ section.id }}" data-count="{{ section.blocks.size }}">
+				{% for block in section.blocks %}
+					<div class="feature features-slide--{{ block.id }}" {{ block.shopify_attributes }}>
+						<div class="features-slider__text text-center">
+							{% if block.settings.icon != blank %}
+								<i class="material-icons">{{ block.settings.icon }}</i>
+							{% endif %}
+							{% if block.settings.feature != blank %}
+								<h3>{{ block.settings.feature }}</h3>
+							{% endif %}
+							{% if block.settings.text != blank %}
+								<p>{{ block.settings.text }}</p>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+
+	{% if section.blocks.size == 0 %}
+		{% include 'no-blocks' %}
+	{% endif %}
+</div>
+
+{% schema %}
+	{
+		"name": "Features",
+		"class": "index-section",
+		"max_blocks": 9,
+		"settings": [
+			{
+				"type": "text",
+				"id": "title",
+				"label": "Heading"
+			}
+		],
+		"blocks": [
+			{
+				"type": "feature",
+				"name": "Feature",
+				"settings": [
+					{
+						"type": "text",
+						"id": "feature",
+						"label": "Feature",
+						"default": "Feature"
+					},
+					{
+						"type": "text",
+						"id": "text",
+						"label": "Text",
+						"default": "Showcase product or store features"
+					},
+					{
+						"type": "text",
+						"id": "icon",
+						"label": "Icon",
+						"default": "star",
+						"info": "From the Material Icons set. Use underscores instead of spaces for the name of each icon e.g. thumb_up"
+					}        
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Features",
+				"category": "Text",
+				"blocks": [
+					{
+						"type": "feature"
+					},
+					{
+						"type": "feature"
+					},
+					{
+						"type": "feature"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}
