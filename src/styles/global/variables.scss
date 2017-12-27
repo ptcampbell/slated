@@ -4,7 +4,6 @@
 
 $color-text: unquote('{{ settings.color_body_text | color_to_rgb }}');
 $color-primary: unquote('{{ settings.color_primary | color_to_rgb }}');
-$color-sale-text: unquote('{{settings.color_sale_text | color_to_rgb}}');
 $color-borders: unquote('{{settings.color_borders | color_to_rgb}}');
 $color-image-overlay-text: unquote('{{settings.color_image_overlay_text | color_to_rgb}}');
 $color-image-overlay: unquote('{{settings.color_image_overlay | color_to_rgb}}');
@@ -23,8 +22,8 @@ $color-overlay-opacity: unquote('{{settings.image_overlay_opacity}}');
 $primary: #D51C3B; // can't use liquid variables to override bulma defaults (must be a color)
 $link: #D51C3B;
 
-a {
-	color:unquote('{{ settings.color_primary | color_to_rgb }}')!important;
+.content a {
+	color:unquote('{{ settings.color_primary | color_to_rgb }}');
 }
 
 .has-text-primary {

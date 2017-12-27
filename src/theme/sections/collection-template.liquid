@@ -1,42 +1,42 @@
 {% if section.settings.layout == 'grid' %}
-  {%- assign limit = section.settings.grid | times: section.settings.rows -%}
+	{%- assign limit = section.settings.grid | times: section.settings.rows -%}
 {% else %}
-  {%- assign limit = 16 -%}
+	{%- assign limit = 16 -%}
 {% endif %}
 {% paginate collection.products by limit %}
 
 <div data-section-id="{{ section.id }}" data-section-type="section">
 
-  {% include 'collection-header' %}
+	{% include 'collection-header' %}
 
-  <div class="collection-filters section">
+	<div class="collection-filters section">
 	{% include 'collection-filters' %}
-  </div>
+	</div>
 
-  <div class="collection-loop section" id="Collection">
+	<div class="collection-loop section" id="Collection">
 	<div class="container">
 
 		{% case section.settings.grid %}
 		{% when '2' %}
-		  {%- assign grid_item_width = 'is-half' -%}
-		  {%- assign image_size = '500x500' -%}
+			{%- assign grid_item_width = 'is-half' -%}
+			{%- assign image_size = '500x500' -%}
 		{% when '3' %}
-		  {%- assign grid_item_width = 'is-one-third-tablet is-half-mobile' -%}
-		  {%- assign image_size = '500x500' -%}
+			{%- assign grid_item_width = 'is-one-third-tablet is-half-mobile' -%}
+			{%- assign image_size = '500x500' -%}
 		{% when '4' %}
-		  {%- assign grid_item_width = 'is-one-quarter-tablet is-half-mobile' -%}
-		  {%- assign image_size = '300x300' -%}
+			{%- assign grid_item_width = 'is-one-quarter-tablet is-half-mobile' -%}
+			{%- assign image_size = '300x300' -%}
 		{% when '5' %}
-		  {%- assign grid_item_width = 'is-one-fifth-tablet is-half-mobile' -%}
-		  {%- assign image_size = '300x300' -%}
+			{%- assign grid_item_width = 'is-one-fifth-tablet is-half-mobile' -%}
+			{%- assign image_size = '300x300' -%}
 		{% endcase %}
 
 		<div class="columns is-mobile is-multiline">
-		  {% for product in collection.products %}
+			{% for product in collection.products %}
 			<div class="column {{ grid_item_width }}">
 				{% include 'product-card-grid', grid_image_width: image_size %}
 			</div>
-		  {% else %}
+			{% else %}
 			{% comment %}
 			Add default products to help with onboarding for collections/all only.
 
@@ -44,7 +44,7 @@
 			store has no products.
 			{% endcomment %}
 			{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-			  <div class="column">
+				<div class="column">
 				<div class="product-card-grid box">
 					{% for i in (1..8) %}
 					<div class="column {{ grid_item_width }}">
@@ -63,11 +63,11 @@
 					</div>
 					{% endfor %}
 				</div>
-			  </div>
+				</div>
 			{% else %}
-			  {%- assign is_empty_collection = true -%}
+				{%- assign is_empty_collection = true -%}
 			{% endif %}
-		  {% endfor %}
+			{% endfor %}
 		</div>
 
 		{% if is_empty_collection %}
@@ -80,61 +80,61 @@
 		{% endpaginate %}
 
 	</div>
-  </div>
+	</div>
 </div>
 
 {% schema %}
 {
-  "name": "Collection pages",
-  "settings": [
-	{
-	  "type": "select",
-	  "id": "grid",
-	  "label": "Products per row (max)",
-	  "default": "4",
-	  "options": [
+	"name": "Collection pages",
+	"settings": [
 		{
-		  "value": "2",
-		  "label": "2"
+			"type": "select",
+			"id": "grid",
+			"label": "Products per row (max)",
+			"default": "4",
+			"options": [
+				{
+					"value": "2",
+					"label": "2"
+				},
+				{
+					"value": "3",
+					"label": "3"
+				},
+				{
+					"value": "4",
+					"label": "4"
+				},
+				{
+					"value": "5",
+					"label": "5"
+				}
+			]
 		},
 		{
-		  "value": "3",
-		  "label": "3"
+			"type": "checkbox",
+			"id": "show_collection_image",
+			"label": "Show collection image",
+			"default": true
 		},
 		{
-		  "value": "4",
-		  "label": "4"
+			"type": "checkbox",
+			"id": "show_vendor",
+			"label": "Show product vendors",
+			"default": false
 		},
 		{
-		  "value": "5",
-		  "label": "5"
+			"type": "checkbox",
+			"id": "sort_enable",
+			"label": "Enable sorting",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "tags_enable",
+			"label": "Enable tag filtering",
+			"default": true
 		}
-	  ]
-	},
-	{
-	  "type": "checkbox",
-	  "id": "show_collection_image",
-	  "label": "Show collection image",
-	  "default": true
-	},
-	{
-	  "type": "checkbox",
-	  "id": "show_vendor",
-	  "label": "Show product vendors",
-	  "default": false
-	},
-	{
-	  "type": "checkbox",
-	  "id": "sort_enable",
-	  "label": "Enable sorting",
-	  "default": true
-	},
-	{
-	  "type": "checkbox",
-	  "id": "tags_enable",
-	  "label": "Enable tag filtering",
-	  "default": true
-	}
-  ]
+	]
 }
 {% endschema %}

@@ -1,5 +1,30 @@
+$color-sale: unquote('{{settings.color_collection_sale | color_to_rgb}}');
+$color-soldout: unquote('{{settings.color_collection_sold | color_to_rgb}}');
+$color-price: unquote('{{settings.color_collection_price | color_to_rgb}}');
+$color-product: unquote('{{settings.color_collection_text | color_to_rgb}}');
+
 .product-card-grid {
 	.image {
 		margin-bottom:1em;
+	}
+	.product-name {
+		color: $color-product;
+	}
+	.product__price,
+	.product-price__price {
+		color: $color-price;
+	}
+	.product-price__sold-out {
+		color: $color-soldout;
+	}
+	.product-price__sale-label {
+		color: $color-sale;
+	}
+	s.product-price__price {
+		opacity:0.5;
+
+		&:hover {
+			opacity:1;
+		}
 	}
 }

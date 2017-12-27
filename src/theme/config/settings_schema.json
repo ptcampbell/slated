@@ -10,172 +10,210 @@
   {
     "name": "Colors",
     "settings": [
-      {
-        "type": "color",
-        "id": "color_body_text",
-        "label": "Body text",
-        "default": "#788188"
-      },
-      {
-        "type": "color",
-        "id": "color_primary",
-        "label": "Primary Color",
-        "default": "#00d1b2"
-      },      
-      {
-        "type": "color",
-        "id": "color_sale_text",
-        "label": "Sale text",
-        "default": "#7796A8"
-      },
-      {
-        "type": "color",
-        "id": "color_borders",
-        "label": "Borders and lines",
-        "default": "#e8e9eb"
-      },
-      {
-        "type": "color",
-        "id": "color_button",
-        "label": "Buttons",
-        "default": "#7796A8"
-      },
-      {
-        "type": "color",
-        "id": "color_button_text",
-        "label": "Button text",
-        "default": "#fff"
-      },
-      {
-        "type": "color",
-        "id": "color_small_button",
-        "label": "Small buttons",
-        "default": "#fff"
-      },
-      {
-        "type": "color",
-        "id": "color_small_button_text",
-        "label": "Small button text",
-        "default": "#3d4246"
-      },
-      {
-        "type": "color",
-        "id": "color_text_field",
-        "label": "Text fields",
-        "default": "#fff"
-      },
-      {
-        "type": "color",
-        "id": "color_text_field_text",
-        "label": "Text field text",
-        "default": "#000"
-      },
-      {
-        "type": "header",
-        "content": "Image overlays"
-      },
-      {
-        "type": "color",
-        "id": "color_image_overlay_text",
-        "label": "Text",
-        "default": "#fff"
-      },
-      {
-        "type": "color",
-        "id": "color_image_overlay",
-        "label": "Background",
-        "default": "#3d4246"
-      },
-      {
-        "type": "select",
-        "id": "image_overlay_opacity",
-        "label": "Opacity",
-        "default": "0.25",
-        "options": [
-          {
-            "label": "100%",
-            "value": "1"
-          },
-          {
-            "label": "95%",
-            "value": "0.95"
-          },
-          {
-            "label": "90%",
-            "value": "0.9"
-          },
-          {
-            "label": "85%",
-            "value": "0.85"
-          },
-          {
-            "label": "80%",
-            "value": "0.8"
-          },
-          {
-            "label": "75%",
-            "value": "0.75"
-          },
-          {
-            "label": "70%",
-            "value": "0.7"
-          },
-          {
-            "label": "65%",
-            "value": "0.65"
-          },
-          {
-            "label": "60%",
-            "value": "0.6"
-          },
-          {
-            "label": "55%",
-            "value": "0.55"
-          },
-          {
-            "label": "50%",
-            "value": "0.5"
-          },
-          {
-            "label": "45%",
-            "value": "0.45"
-          },
-          {
-            "label": "40%",
-            "value": "0.4"
-          },
-          {
-            "label": "35%",
-            "value": "0.35"
-          },
-          {
-            "label": "30%",
-            "value": "0.3"
-          },
-          {
-            "label": "25%",
-            "value": "0.25"
-          },
-          {
-            "label": "20%",
-            "value": "0.2"
-          },
-          {
-            "label": "0%",
-            "value": "0"
-          }
-        ]
-      },
-      {
-        "type": "header",
-        "content": "Background"
-      },
-      {
-        "type": "color",
-        "id": "color_body_bg",
-        "label": "Background color",
-        "default": "#fff"
-      }
+		{
+			"type": "color",
+			"id": "color_body_text",
+			"label": "Body text",
+			"default": "#788188"
+		},
+		{
+			"type": "color",
+			"id": "color_primary",
+			"label": "Primary Color",
+			"default": "#00d1b2"
+		},
+		{
+			"type": "color",
+			"id": "color_borders",
+			"label": "Borders and lines",
+			"default": "#e8e9eb"
+		},
+		{
+			"type": "color",
+			"id": "color_button",
+			"label": "Buttons",
+			"default": "#7796A8"
+		},
+		{
+			"type": "color",
+			"id": "color_button_text",
+			"label": "Button text",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "color_small_button",
+			"label": "Small buttons",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "color_small_button_text",
+			"label": "Small button text",
+			"default": "#3d4246"
+		},
+		{
+			"type": "color",
+			"id": "color_text_field",
+			"label": "Text fields",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "color_text_field_text",
+			"label": "Text field text",
+			"default": "#000"
+		},
+		{
+			"type": "header",
+			"content": "Image overlays"
+		},
+		{
+			"type": "color",
+			"id": "color_image_overlay_text",
+			"label": "Text",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "color_image_overlay",
+			"label": "Background",
+			"default": "#3d4246"
+		},
+		{
+			"type": "select",
+			"id": "image_overlay_opacity",
+			"label": "Opacity",
+			"default": "0.25",
+			"options": [
+				{
+					"label": "100%",
+					"value": "1"
+				},
+				{
+					"label": "95%",
+					"value": "0.95"
+				},
+				{
+					"label": "90%",
+					"value": "0.9"
+				},
+				{
+					"label": "85%",
+					"value": "0.85"
+				},
+				{
+					"label": "80%",
+					"value": "0.8"
+				},
+				{
+					"label": "75%",
+					"value": "0.75"
+				},
+				{
+					"label": "70%",
+					"value": "0.7"
+				},
+				{
+					"label": "65%",
+					"value": "0.65"
+				},
+				{
+					"label": "60%",
+					"value": "0.6"
+				},
+				{
+					"label": "55%",
+					"value": "0.55"
+				},
+				{
+					"label": "50%",
+					"value": "0.5"
+				},
+				{
+					"label": "45%",
+					"value": "0.45"
+				},
+				{
+					"label": "40%",
+					"value": "0.4"
+				},
+				{
+					"label": "35%",
+					"value": "0.35"
+				},
+				{
+					"label": "30%",
+					"value": "0.3"
+				},
+				{
+					"label": "25%",
+					"value": "0.25"
+				},
+				{
+					"label": "20%",
+					"value": "0.2"
+				},
+				{
+					"label": "0%",
+					"value": "0"
+				}
+			]
+		},
+		{
+			"type": "header",
+			"content": "Background"
+		},
+		{
+			"type": "color",
+			"id": "color_body_bg",
+			"label": "Background color",
+			"default": "#fff"
+		},
+		{
+			"type": "header",
+			"content": "Product thumbnails"
+		},
+		{
+			"type": "color",
+			"id": "color_collection_text",
+			"label": "Product title color",
+			"default": "#222"
+		},
+		{
+			"type": "color",
+			"id": "color_collection_price",
+			"label": "Price color",
+			"default": "#666"
+		},
+		{
+			"type": "color",
+			"id": "color_collection_sale",
+			"label": "Sale label color",
+			"default": "#666"
+		},
+		{
+			"type": "header",
+			"content": "Header colors"
+		},
+		{
+			"type": "color",
+			"id": "color_nav_bg",
+			"label": "Background color",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "color_nav_text",
+			"label": "Link color",
+			"default": "#333"
+		},
+		{
+			"type": "color",
+			"id": "color_nav_primary",
+			"label": "Primary color",
+			"default": "#D51C3B"
+		}
     ]
   },
   {

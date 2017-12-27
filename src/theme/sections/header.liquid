@@ -1,111 +1,99 @@
-<style>
-	{% if section.settings.logo != blank %}
-		.site-header__logo-image {
-			max-width: {{ section.settings.logo_max_width }}px;
-		}
-	{% endif %}
-</style>
-
 <div data-section-id="{{ section.id }}" data-section-type="header-section" class="header-section">
+	<header class="navbar is-fixed-top">
+		<div class="navbar-brand" itemscope itemtype="http://schema.org/Organization">
+			<a href="/" itemprop="url" class="navbar-item site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+				{% if section.settings.logo != blank %}
+					{% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+					<img src="{{ section.settings.logo | img_url: image_size }}"
+								srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+								alt="{{ section.settings.logo.alt | default: shop.name }}"
+								itemprop="logo">
+				{% else %}
+					{{ shop.name }}
+				{% endif %}
+			</a>
+			<button class="button navbar-burger" data-target="navMenu">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+		</div>
 
-		<header class="navbar is-fixed-top">
-
-			<div class="navbar-brand" itemscope itemtype="http://schema.org/Organization">
-				<a href="/" itemprop="url" class="navbar-item site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
-					{% if section.settings.logo != blank %}
-						{% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-						<img src="{{ section.settings.logo | img_url: image_size }}"
-								 srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-								 alt="{{ section.settings.logo.alt | default: shop.name }}"
-								 itemprop="logo">
+		{% comment %} consider separate file here
+		{% if shop.customer_accounts_enabled %}
+				<ul>
+					{% if customer %}
+						<li>
+							{% if customer.first_name != blank %}
+								{% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+								{{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+							{% else %}
+								<a href="/account">{{ 'layout.customer.account' | t }}</a>
+							{% endif %}
+						</li>
+						<li>
+							{{ 'layout.customer.log_out' | t | customer_logout_link }}
+						</li>
 					{% else %}
-						{{ shop.name }}
+						<li>
+							{{ 'layout.customer.log_in' | t | customer_login_link }}
+						</li>
+						<li>
+							{{ 'layout.customer.create_account' | t | customer_register_link }}
+						</li>
 					{% endif %}
-				</a>
-				<button class="button navbar-burger" data-target="navMenu">
-					<span></span>
-					<span></span>
-					<span></span>
-				</button>
+				</ul>
+		{% endif %}
+		{% endcomment %}
+
+		<nav class="navbar-menu" role="navigation" id="navMenu">
+			<div class="navbar-start">
+				{% for link in linklists[section.settings.main_linklist].links %}
+					{%- assign child_list_handle = link.title | handleize -%}
+					{% if menus[child_list_handle].links != blank %}
+					<div class="navbar-item has-dropdown is-hoverable">
+						<a href="{{ link.url }}" class="navbar-link">
+								{{ link.title }}
+						</a>
+						<div class="navbar-dropdown">
+							{% for childlink in menus[child_list_handle].links %}
+								<a href="{{ childlink.url }}" class="navbar-item{% if childlink.active %} is-active{% endif %}">{{ childlink.title | escape }}</a>
+							{% endfor %}
+						</div>
+					</div>
+					{% else %}
+						<a class="navbar-item{% if link.active %} active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+					{% endif %}
+				{% endfor %}
 			</div>
 
-			{% comment %} consider separate file here 
-			{% if shop.customer_accounts_enabled %}
-					<ul>
-						{% if customer %}
-							<li>
-								{% if customer.first_name != blank %}
-									{% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-									{{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-								{% else %}
-									<a href="/account">{{ 'layout.customer.account' | t }}</a>
-								{% endif %}
-							</li>
-							<li>
-								{{ 'layout.customer.log_out' | t | customer_logout_link }}
-							</li>
-						{% else %}
-							<li>
-								{{ 'layout.customer.log_in' | t | customer_login_link }}
-							</li>
-							<li>
-								{{ 'layout.customer.create_account' | t | customer_register_link }}
-							</li>
-						{% endif %}
-					</ul>
-			{% endif %}
-			{% endcomment %}
-
-			<nav class="navbar-menu" role="navigation" id="navMenu">
-				<div class="navbar-start">
-					{% for link in linklists[section.settings.main_linklist].links %}
-						{%- assign child_list_handle = link.title | handleize -%}
-						{% if menus[child_list_handle].links != blank %}
-						<div class="navbar-item has-dropdown is-hoverable">
-							<a href="{{ link.url }}" class="navbar-link">
-									{{ link.title }}
-							</a>
-							<div class="navbar-dropdown">
-								{% for childlink in menus[child_list_handle].links %}
-									<a href="{{ childlink.url }}" class="navbar-item{% if childlink.active %} is-active{% endif %}">{{ childlink.title | escape }}</a>
-								{% endfor %}
-							</div>
-						</div>
-						{% else %}
-							<a class="navbar-item{% if link.active %} active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
-						{% endif %}
-					{% endfor %}
-				</div>
-
-				<div class="navbar-end">
-					<a href="/cart" class="navbar-item">
-						{{ 'layout.cart.title' | t }}
-						({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-					</a>
-					<a href="#" class="navbar-item">
-						<span class="icon is-medium">
-							<i class="mdi mdi-24px mdi-cart"></i>
-						</span>
-					</a>
-					<form class="navbar-item is-hidden" action="/search" method="get" role="search">
-						<label for="Search" class="label-hidden">
-							{{ 'general.search.placeholder' | t }}
-						</label>
-						<input type="search"
-									name="q"
-									id="Search"
-									value="{{ search.terms | escape }}"
-									placeholder="{{ 'general.search.placeholder' | t }}">
-						<button type="submit" class="btn">
-							{% include 'icon-search' %}
-							<span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-						</button>
-					</form>
-				</div>
-			</nav>
-
+			<div class="navbar-end">
+				<a href="/cart" class="navbar-item">
+					{{ 'layout.cart.title' | t }}
+					({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+				</a>
+				<a href="#" class="navbar-item">
+					<span class="icon is-medium">
+						<i class="mdi mdi-24px mdi-cart"></i>
+					</span>
+				</a>
+				<form class="navbar-item is-hidden" action="/search" method="get" role="search">
+					<label for="Search" class="label-hidden">
+						{{ 'general.search.placeholder' | t }}
+					</label>
+					<input type="search"
+								name="q"
+								id="Search"
+								value="{{ search.terms | escape }}"
+								placeholder="{{ 'general.search.placeholder' | t }}">
+					<button type="submit" class="btn">
+						{% include 'icon-search' %}
+						<span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+					</button>
+				</form>
+			</div>
+		</nav>
 	</header>
-
 </div>
 
 {% schema %}
@@ -136,3 +124,59 @@
 		]
 	}
 {% endschema %}
+
+<style>
+
+	{% if section.settings.logo != blank %}
+		.header-section .site-logo {
+			max-width: {{ section.settings.logo_max_width }}px;
+		}
+	{% endif %}
+
+	/* background color */
+	.navbar-item.has-dropdown:hover .navbar-link,
+	.navbar-item.has-dropdown.is-active .navbar-link,
+	.navbar-dropdown,
+	.navbar {
+		background-color:{{settings.color_nav_bg | color_to_rgb}};
+		border-color:transparent;
+	}
+
+	/* primary colour */
+	.navbar-item.site-logo {
+		color:{{settings.color_nav_primary | color_to_rgb }};
+	}
+	.navbar-item.site-logo:hover {
+		color:{{settings.color_nav_primary | color_darken: 30 | color_to_rgb }};
+	}
+
+	/* text colour */
+	.navbar-item,
+	a.navbar-link {
+		color:{{settings.color_nav_text | color_to_rgb}};
+	}
+
+	.navbar-dropdown a.navbar-item.is-active,
+	a.navbar-item.is-active, a.navbar-link.is-active {
+		background-color:transparent;
+		color:{{settings.color_nav_text | color_darken: 30 | color_to_rgb}};
+	}
+
+	/* hover colour */
+	a.navbar-item:hover,
+	a.navbar-link:hover {
+		background-color:transparent;
+		color:{{settings.color_nav_text | color_darken: 30 | color_to_rgb }};
+	}
+
+	@media screen and (min-width: 1024px) {
+		.navbar-link::after {
+			border-color:{{settings.color_nav_text | color_lighten: 30 | color_to_rgb}};
+		}
+		.navbar-dropdown a.navbar-item:hover {
+    		background-color:transparent;
+    		color:{{settings.color_nav_text | color_darken: 30 | color_to_rgb}};
+		}
+	}
+
+</style>
