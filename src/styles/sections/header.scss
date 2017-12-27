@@ -3,10 +3,27 @@
  * ------------------*/
 
 .header-section {
+	.navbar-menu {
+		background-color:transparent;
+	}
 	.navbar-burger {
 		outline:none;
 		border-radius:0;
 		border:none;
 		box-shadow:none!important;
+		background-color:transparent;
+	}
+	.cart-item {
+		position: absolute;
+		top:1px;
+		right:0px;
+
+		.cart-item__count {
+			display:none;
+		}
+
+		@media screen and (max-width: 1024px) {
+			right:3.25rem;
+		}
 	}
 }

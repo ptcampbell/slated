@@ -68,13 +68,13 @@
 			</div>
 
 			<div class="navbar-end">
-				<a href="/cart" class="navbar-item">
-					{{ 'layout.cart.title' | t }}
-					({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-				</a>
-				<a href="#" class="navbar-item">
+				<a href="/cart" class="navbar-item cart-item">
 					<span class="icon is-medium">
 						<i class="mdi mdi-24px mdi-cart"></i>
+					</span>
+					<span class="cart-item__count">
+						{{ 'layout.cart.title' | t }}
+						({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
 					</span>
 				</a>
 				<form class="navbar-item is-hidden" action="/search" method="get" role="search">
@@ -151,6 +151,8 @@
 	}
 
 	/* text colour */
+	.navbar-burger,
+	.navbar-burger.is-active,
 	.navbar-item,
 	a.navbar-link {
 		color:{{settings.color_nav_text | color_to_rgb}};
@@ -171,7 +173,7 @@
 
 	@media screen and (min-width: 1024px) {
 		.navbar-link::after {
-			border-color:{{settings.color_nav_text | color_lighten: 30 | color_to_rgb}};
+			border-color:{{settings.color_nav_text | color_darken: 50 | color_to_rgb}};
 		}
 		.navbar-dropdown a.navbar-item:hover {
     		background-color:transparent;
