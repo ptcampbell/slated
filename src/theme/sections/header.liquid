@@ -21,28 +21,28 @@
 
 		{% comment %} consider separate file here
 		{% if shop.customer_accounts_enabled %}
-				<ul>
-					{% if customer %}
-						<li>
-							{% if customer.first_name != blank %}
-								{% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-								{{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-							{% else %}
-								<a href="/account">{{ 'layout.customer.account' | t }}</a>
-							{% endif %}
-						</li>
-						<li>
-							{{ 'layout.customer.log_out' | t | customer_logout_link }}
-						</li>
-					{% else %}
-						<li>
-							{{ 'layout.customer.log_in' | t | customer_login_link }}
-						</li>
-						<li>
-							{{ 'layout.customer.create_account' | t | customer_register_link }}
-						</li>
-					{% endif %}
-				</ul>
+			<ul>
+				{% if customer %}
+					<li>
+						{% if customer.first_name != blank %}
+							{% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+							{{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+						{% else %}
+							<a href="/account">{{ 'layout.customer.account' | t }}</a>
+						{% endif %}
+					</li>
+					<li>
+						{{ 'layout.customer.log_out' | t | customer_logout_link }}
+					</li>
+				{% else %}
+					<li>
+						{{ 'layout.customer.log_in' | t | customer_login_link }}
+					</li>
+					<li>
+						{{ 'layout.customer.create_account' | t | customer_register_link }}
+					</li>
+				{% endif %}
+			</ul>
 		{% endif %}
 		{% endcomment %}
 
@@ -73,24 +73,26 @@
 						<i class="mdi mdi-24px mdi-cart"></i>
 					</span>
 					<span class="cart-item__count">
-						{{ 'layout.cart.title' | t }}
+						<span class="is-hidden">
+							{{ 'layout.cart.title' | t }}
+						</span>
 						({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
 					</span>
 				</a>
-				<form class="navbar-item is-hidden" action="/search" method="get" role="search">
-					<label for="Search" class="label-hidden">
-						{{ 'general.search.placeholder' | t }}
-					</label>
-					<input type="search"
-								name="q"
-								id="Search"
-								value="{{ search.terms | escape }}"
-								placeholder="{{ 'general.search.placeholder' | t }}">
-					<button type="submit" class="btn">
-						{% include 'icon-search' %}
-						<span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-					</button>
+				<form class="navbar-item" action="/search" method="get" role="search">
+					<p class="control has-icons-left">
+						<label for="Search" class="is-hidden">
+							{{ 'general.search.placeholder' | t }}
+						</label>
+						<input class="input" type="search" placeholder="Search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}"/>
+						<span class="icon is-medium">
+							<i class="mdi mdi-24px mdi-magnify"></i>
+						</span>
+					</p>
 				</form>
+				<span class="icon is-medium">
+					<i class="mdi mdi-24px mdi-magnify"></i>
+				</span>
 			</div>
 		</nav>
 	</header>

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	var sections = new slate.Sections();
 	sections.register('product', theme.Product);
 	sections.register('slideshow-section', theme.SlideshowSection);
@@ -29,5 +29,5 @@ $(document).ready(function() {
 			});
 		});
 	}
-		
+
 });

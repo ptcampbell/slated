@@ -2,14 +2,26 @@
 	<div class="container">
 		<div class="columns">
 			{% for block in section.blocks %}
-				<div class="column is-one-quarter" {{ block.shopify_attributes }}>
+
+				{% case block.settings.block_width %}
+				{% when '2' %}
+					{%- assign column_width = 'is-half' -%}
+				{% when '3' %}
+					{%- assign column_width = 'is-one-third-tablet is-half-mobile' -%}
+				{% when '4' %}
+					{%- assign column_width = 'is-one-quarter-tablet is-half-mobile' -%}
+				{% when '5' %}
+					{%- assign column_width = 'is-one-fifth-tablet is-half-mobile' -%}
+				{% endcase %}
+
+				<div class="column {{ column_width }}" {{ block.shopify_attributes }}>
 				{% case block.type %}
 					{% when 'menu' %}
 						{%- assign footer_linklist = block.settings.footer_linklist -%}
 						{% if linklists[footer_linklist].links.size > 0 %}
 							<ul>
 								{% if section.settings.show_menu_titles %}
-									<li>{{linklists[footer_linklist].title}}</li>
+									<li class="menu-title">{{linklists[footer_linklist].title}}</li>
 								{% endif %}
 								{% for link in linklists[footer_linklist].links %}
 									<li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -17,13 +29,18 @@
 							</ul>
 						{% endif %}
 					{% when 'text' %}
-						{{block.settings.richtext}}
-					{% endcase %}
-					</div>
+						<div class="text-block">
+							<p class="text-title">{{block.settings.text_title}}</p>
+							{{block.settings.richtext}}
+						</div>
+					{% when 'spacer' %}
+						<div class="spacer-block"></div>
+				{% endcase %}
+				</div>
 			{% endfor %}
 		</div>
 
-		<div class="level">
+		<div class="level footer-bottom">
 			<div class="level-left">
 				<span class="footer-copyright">{{ shop.name | link_to: '/' }} &copy; {{ 'now' | date: "%Y" }}</span>
 				{%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
@@ -34,7 +51,6 @@
 						{%- assign social_handle = social | handleize -%}
 						{% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
 						{% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
-
 						{% if settings[social_link] != blank %}
 							<li>
 								<a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
@@ -46,25 +62,25 @@
 					{% endfor %}
 				</ul>
 			</div>
-		</div> 
+		</div>
 
-	 {% if section.settings.show_payment_icons %}
-			{% unless shop.enabled_payment_types == empty %}
-				{%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
-				<span class="is-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
-				<ul class="payment-icons">
-					{% for type in shop.enabled_payment_types %}
-						{% if payment_icons_available contains type %}
-							<li>
-								{%- assign icon_name = type | prepend: 'icon-' -%}
-								{% include icon_name %}
-								<span class="is-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
-							</li>
-						{% endif %}
-					{% endfor %}
-				</ul>
-			{% endunless %}
-		{% endif %} 
+	{% if section.settings.show_payment_icons %}
+		{% unless shop.enabled_payment_types == empty %}
+			{%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
+			<span class="is-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+			<ul class="payment-icons">
+				{% for type in shop.enabled_payment_types %}
+					{% if payment_icons_available contains type %}
+						<li>
+							{%- assign icon_name = type | prepend: 'icon-' -%}
+							{% include icon_name %}
+							<span class="is-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		{% endunless %}
+	{% endif %}
 
 
 	</div>
@@ -94,9 +110,42 @@
 				"name": "Text",
 				"settings": [
 					{
+						"type": "text",
+						"id": "text_title",
+						"label": "Title"
+					},
+					{
 						"type": "richtext",
 						"id": "richtext",
 						"label": "Text"
+					},
+					{
+						"type": "select",
+						"id": "block_width",
+						"label": "Block width",
+						"default": "",
+						"options": [
+								{
+									"value": "",
+									"label": "Auto"
+								},
+								{
+									"value": "2",
+									"label": "One half"
+								},
+								{
+									"value": "3",
+									"label": "One third"
+								},
+								{
+									"value": "4",
+									"label": "One quarter"
+								},
+								{
+									"value": "5",
+									"label": "One fifth"
+								}
+						]
 					}
 				]
 			},
@@ -108,11 +157,127 @@
 					 {
 						"type": "link_list",
 						"id": "footer_linklist",
-						"label": "First menu",
+						"label": "Menu",
 						"default": "footer"
+					},
+					{
+						"type": "select",
+						"id": "block_width",
+						"label": "Block width",
+						"default": "",
+						"options": [
+								{
+									"value": "",
+									"label": "Auto"
+								},
+								{
+									"value": "2",
+									"label": "One half"
+								},
+								{
+									"value": "3",
+									"label": "One third"
+								},
+								{
+									"value": "4",
+									"label": "One quarter"
+								},
+								{
+									"value": "5",
+									"label": "One fifth"
+								}
+						]
+					}
+				]
+			},
+			{
+				"type": "spacer",
+				"name": "Spacer",
+				"limit": 2,
+				"settings": [
+					{
+						"type": "select",
+						"id": "block_width",
+						"label": "Block width",
+						"default": "",
+						"options": [
+								{
+									"value": "",
+									"label": "Auto"
+								},
+								{
+									"value": "2",
+									"label": "One half"
+								},
+								{
+									"value": "3",
+									"label": "One third"
+								},
+								{
+									"value": "4",
+									"label": "One quarter"
+								},
+								{
+									"value": "5",
+									"label": "One fifth"
+								}
+						]
 					}
 				]
 			}
 		]
 	}
 {% endschema %}
+
+<style>
+
+	/* background color */
+	.footer {
+		background-color:{{settings.color_footer_bg | color_to_rgb}};
+	}
+
+	/* text block colour */
+	.text-block,
+	.text-block p {
+		color:{{settings.color_footer_text | color_to_rgb }};
+	}
+	.text-block a {
+		text-decoration:underline;
+		color:{{settings.color_footer_text | color_to_rgb }};
+	}
+	.text-block a:hover {
+		color:{{settings.color_footer_text | color_darken: 30 | color_to_rgb }};
+	}
+	.text-block .text-title {
+		margin:0 0 1em 0;
+		color:{{settings.color_footer_text_label | color_to_rgb }};
+	}
+
+	/* menu label colour */
+	li.menu-title {
+		color:{{settings.color_footer_text_label | color_to_rgb }};
+	}
+
+	/* menu link colour */
+	a {
+		color:{{settings.color_footer_primary | color_to_rgb }};
+	}
+	a:hover {
+		color:{{settings.color_footer_primary | color_darken: 30 | color_to_rgb }};
+	}
+
+	/* bottom text color (copyright and extra menu) */
+	li {
+		color:{{settings.color_footer_text_bottom | color_to_rgb }};
+	}
+	.footer-bottom,
+	.footer-bottom a {
+		color:{{settings.color_footer_text_bottom | color_to_rgb }};
+	}
+	.footer-bottom a:hover {
+		color:{{settings.color_footer_text_bottom | color_to_rgb }};
+		text-decoration:underline;
+	}
+
+
+</style>

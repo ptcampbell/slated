@@ -1,6 +1,6 @@
-# 🚧 &nbsp;slated
+# 🚧  slated
 
-Slated is a starter theme for Shopify using a mixture of elements from Slate, ThemeKit, [Shopify Skeleton](https://github.com/Pixel2HTML/shopify-skeleton), [Gulp Shopify Theme](https://github.com/tmslnz/gulp-shopify-theme) and Timber – using Bulma as a CSS framework.
+Slated is a starter theme for Shopify using a mixture of elements from Shopify Slate, ThemeKit, [Shopify Skeleton](https://github.com/Pixel2HTML/shopify-skeleton), [Gulp Shopify Theme](https://github.com/tmslnz/gulp-shopify-theme) and Timber – using Bulma as a CSS framework.
 
 <hr>
 
@@ -20,6 +20,7 @@ Slated is a starter theme for Shopify using a mixture of elements from Slate, Th
 - Testimonials
 - Product slideshow
 - Reviews
+- _Others soon_
 
 ##### Usage
 
@@ -33,16 +34,12 @@ $ npm run build
 # full deployment
 $ npm run deploy
 
-# delete theme files
+# purge theme files on shopify
 $ npm run kill-theme
 ```
 ### Demo
-🌎 &nbsp; https://theme-anorak-slate.myshopify.com
+🌎  https://theme-anorak-slate.myshopify.com
 
 ### Shopify themes? 
 
-💸 &nbsp; https://themeanorak.com
-
-<hr>
-
-###### 🚨 &nbsp; WORK IN PROGRESS KLAXON &nbsp; 🚨
+💸  https://themeanorak.com
