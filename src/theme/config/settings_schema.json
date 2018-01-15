@@ -889,13 +889,19 @@
 		]
 	},
 	{
-		"name": "Galleries",
+		"name": "Mailing lists",
 		"settings": [
 			{
-				"type": "richtext",
-				"id": "gallery-list",
-				"label": "List of Galleries",
-				"info": "Put in the names like so: AwesomeAnalogs1, DashingDigitals2"
+				"type": "text",
+				"id": "mailing_list_action_url",
+				"label": "Form action URL",
+				"info":"Found in embeddable form (see docs)"
+			},
+			{
+				"type": "text",
+				"id": "campaign_monitor_name",
+				"label": "Campaign Monitor name",
+				"info": "Required if using CM"
 			}
 		]
 	}

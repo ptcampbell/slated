@@ -1,11 +1,40 @@
+/*
+ *   Footer blocks
+ * ------------------*/
+
 footer {
+	.footer-blocks {
+		padding-bottom:2em;
+	}
 	.footer-copyright {
-		margin-right:1em;
+		display:inline-block;
+		margin-bottom:2em;
 	}
-	li.menu-title {
+	.block-title {
 		margin-bottom:1em;
+		display:block;
 	}
-	ul.social-icons {
+	.field {
+		width:100%;
+	}
+	.field.has-addons {
+		@media screen and (max-width: 1024px) {
+			justify-content: center;
+
+			.control.is-expanded {
+				flex-grow: 0;
+			}
+		}
+	}
+	.text-block {
+		@media screen and (max-width: 1024px) {
+			p {
+				max-width:60%;
+				margin:0 auto;
+			}
+		}
+	}
+	.social-icons {
 		margin:0;
 		padding:0;
 

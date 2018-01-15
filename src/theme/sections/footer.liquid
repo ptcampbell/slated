@@ -1,17 +1,17 @@
 <footer class="footer is-size-7">
 	<div class="container">
-		<div class="columns">
+		<div class="columns footer-blocks">
 			{% for block in section.blocks %}
 
 				{% case block.settings.block_width %}
 				{% when '2' %}
-					{%- assign column_width = 'is-half' -%}
+					{%- assign column_width = 'is-half is-full-mobile has-text-centered-mobile' -%}
 				{% when '3' %}
-					{%- assign column_width = 'is-one-third-tablet is-half-mobile' -%}
+					{%- assign column_width = 'is-one-third-tablet is-full-mobile has-text-centered-mobile' -%}
 				{% when '4' %}
-					{%- assign column_width = 'is-one-quarter-tablet is-half-mobile' -%}
+					{%- assign column_width = 'is-one-quarter-tablet is-full-mobile has-text-centered-mobile' -%}
 				{% when '5' %}
-					{%- assign column_width = 'is-one-fifth-tablet is-half-mobile' -%}
+					{%- assign column_width = 'is-one-fifth-tablet is-full-mobile has-text-centered-mobile' -%}
 				{% endcase %}
 
 				<div class="column {{ column_width }}" {{ block.shopify_attributes }}>
@@ -21,7 +21,7 @@
 						{% if linklists[footer_linklist].links.size > 0 %}
 							<ul>
 								{% if section.settings.show_menu_titles %}
-									<li class="menu-title">{{linklists[footer_linklist].title}}</li>
+									<li class="block-title">{{linklists[footer_linklist].title}}</li>
 								{% endif %}
 								{% for link in linklists[footer_linklist].links %}
 									<li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -30,22 +30,51 @@
 						{% endif %}
 					{% when 'text' %}
 						<div class="text-block">
-							<p class="text-title">{{block.settings.text_title}}</p>
+							<p class="block-title">{{block.settings.text_title}}</p>
 							{{block.settings.richtext}}
 						</div>
 					{% when 'spacer' %}
 						<div class="spacer-block"></div>
+					{% when 'logo' %}
+						{% capture image_size %}{{ block.settings.logo_max_width }}x{% endcapture %}
+						<div class="logo-block">
+							<img src="{{ block.settings.footer_logo | img_url: image_size }}"
+										srcset="{{ block.settings.footer_logo | img_url: image_size }} 1x, {{ block.settings.footer_logo | img_url: image_size, scale: 2 }} 2x"
+										alt="{{ block.settings.footer_logo.alt | default: shop.name }}"
+										itemprop="logo"/>
+						</div>
+					{% when 'newsletter' %}
+						<div class="newsletter-block">
+							{% if section.settings.show_menu_titles %}
+								<p class="block-title ">{{ block.settings.footer_newsletter_title }}</p>
+							{% endif %}
+							<form action="{{ settings.mailing_list_action_url }}" method="post" name="{% if block.settings.mailing_list_platform == 'mailchimp' %}mc-embedded-subscribe-form{% endif %}" class="mailing-list-signup" target="_blank">
+									<div class="field has-addons">
+										<div class="control{% if block.settings.footer_newsletter_wide %} is-expanded{% endif %}">
+											{% if block.settings.mailing_list_platform == 'mailchimp' %}
+												<input class="input is-small email" name="EMAIL" type="email" placeholder="{{ block.settings.footer_newsletter_placeholder }}" value="">
+											{% endif %}
+											{% if block.settings.mailing_list_platform == 'campaign_monitor' %}
+												<input id="fieldEmail" class="input is-small email" name="{{ settings.campaign_monitor_name }}" type="email" placeholder="{{ block.settings.footer_newsletter_placeholder }}" required />
+											{% endif %}
+										</div>
+										<div class="control">
+											<input class="button is-primary is-small submit" name="subscribe" type="submit" value="{{ block.settings.footer_newsletter_button_text }}">
+										</div>
+									</div>
+							</form>
+						</div>
 				{% endcase %}
 				</div>
 			{% endfor %}
 		</div>
 
-		<div class="level footer-bottom">
-			<div class="level-left">
+		<div class="{% unless section.settings.center_icons %}level {% endunless %}footer-bottom">
+			<div class="{% if section.settings.center_icons %}has-text-centered{% else %}level-left{% endif %}">
 				<span class="footer-copyright">{{ shop.name | link_to: '/' }} &copy; {{ 'now' | date: "%Y" }}</span>
 				{%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
 			</div>
-			<div class="level-right">
+			<div class="{% if section.settings.center_icons %}has-text-centered{% else %}level-right{% endif %}">
 				<ul class="social-icons">
 					{% for social in social_accounts %}
 						{%- assign social_handle = social | handleize -%}
@@ -98,12 +127,18 @@
 			},
 			{
 				"type": "checkbox",
+				"id": "center_icons",
+				"label": "Center align icons",
+				"default": true
+			},
+			{
+				"type": "checkbox",
 				"id": "show_menu_titles",
-				"label": "Show menu titles",
+				"label": "Show block titles",
 				"default": false
 			}
 		],
-		"max_blocks": 4,
+		"max_blocks": 5,
 		"blocks": [
 			{
 				"type": "text",
@@ -224,6 +259,131 @@
 						]
 					}
 				]
+			},
+			{
+				"type": "logo",
+				"name": "Logo",
+				"limit": 1,
+				"settings": [
+					 {
+						"type": "image_picker",
+						"id": "footer_logo",
+						"label": "Logo"
+					},
+					{
+						"type": "select",
+						"id": "block_width",
+						"label": "Block width",
+						"default": "",
+						"options": [
+								{
+									"value": "",
+									"label": "Auto"
+								},
+								{
+									"value": "2",
+									"label": "One half"
+								},
+								{
+									"value": "3",
+									"label": "One third"
+								},
+								{
+									"value": "4",
+									"label": "One quarter"
+								},
+								{
+									"value": "5",
+									"label": "One fifth"
+								}
+						]
+					},
+					{
+						"type": "range",
+						"id": "logo_max_width",
+						"min": 50,
+						"max": 450,
+						"step": 10,
+						"unit": "px",
+						"label": "Custom logo width",
+						"default": 250
+					}
+				]
+			},
+			{
+				"type": "newsletter",
+				"name": "Newsletter",
+				"limit": 1,
+				"settings": [
+					 {
+						"type": "text",
+						"id": "footer_newsletter_title",
+						"label": "Title"
+					},
+					{
+						"type": "text",
+						"id": "footer_newsletter_placeholder",
+						"label": "Input placeholder",
+						"info": "Displayed when field is empty",
+						"default": "Email address"
+					},
+					{
+						"type": "text",
+						"id": "footer_newsletter_button_text",
+						"label": "Button text",
+						"default": "Sign up"
+					},
+					{
+						"type": "select",
+						"id": "mailing_list_platform",
+						"label": "Mailing list platform",
+						"default": "mailchimp",
+						"options": [
+								{
+									"value": "mailchimp",
+									"label": "Mailchimp"
+								},
+								{
+									"value": "campaign_monitor",
+									"label": "Campaign Monitor"
+								}
+						]
+					},
+					{
+						"type": "select",
+						"id": "block_width",
+						"label": "Block width",
+						"default": "",
+						"options": [
+								{
+									"value": "",
+									"label": "Auto"
+								},
+								{
+									"value": "2",
+									"label": "One half"
+								},
+								{
+									"value": "3",
+									"label": "One third"
+								},
+								{
+									"value": "4",
+									"label": "One quarter"
+								},
+								{
+									"value": "5",
+									"label": "One fifth"
+								}
+						]
+					},
+					{
+						"type": "checkbox",
+						"id": "footer_newsletter_wide",
+						"label": "Expand form width",
+						"default": false
+					}
+				]
 			}
 		]
 	}
@@ -237,8 +397,7 @@
 	}
 
 	/* text block colour */
-	.text-block,
-	.text-block p {
+	.text-block {
 		color:{{settings.color_footer_text | color_to_rgb }};
 	}
 	.text-block a {
@@ -253,8 +412,8 @@
 		color:{{settings.color_footer_text_label | color_to_rgb }};
 	}
 
-	/* menu label colour */
-	li.menu-title {
+	/* block label colour */
+	.block-title {
 		color:{{settings.color_footer_text_label | color_to_rgb }};
 	}
 
