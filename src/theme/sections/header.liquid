@@ -68,31 +68,33 @@
 			</div>
 
 			<div class="navbar-end">
+				<form class="navbar-item search-header is-hidden" action="/search" method="get" role="search">
+					<p class="control has-icons-left">
+						<label for="Search" class="is-hidden">
+							{{ 'general.search.placeholder' | t }}
+						</label>
+						<input class="input search-input" type="search" placeholder="Search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}"/>
+						<span class="icon is-medium">
+							<i class="mdi mdi-24px mdi-magnify"></i>
+						</span>
+					</p>
+				</form>
 				<a href="/cart" class="navbar-item cart-item">
 					<span class="icon is-medium">
 						<i class="mdi mdi-24px mdi-cart"></i>
 					</span>
-					<span class="cart-item__count">
+					<span class="cart-item-count">
 						<span class="is-hidden">
 							{{ 'layout.cart.title' | t }}
 						</span>
 						({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
 					</span>
 				</a>
-				<form class="navbar-item" action="/search" method="get" role="search">
-					<p class="control has-icons-left">
-						<label for="Search" class="is-hidden">
-							{{ 'general.search.placeholder' | t }}
-						</label>
-						<input class="input" type="search" placeholder="Search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}"/>
-						<span class="icon is-medium">
-							<i class="mdi mdi-24px mdi-magnify"></i>
-						</span>
-					</p>
-				</form>
-				<span class="icon is-medium">
-					<i class="mdi mdi-24px mdi-magnify"></i>
-				</span>
+				<div class="navbar-item search-item">
+					<span class="icon is-medium">
+						<i class="mdi mdi-24px mdi-magnify"></i>
+					</span>
+				</div>
 			</div>
 		</nav>
 	</header>

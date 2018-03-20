@@ -14,15 +14,8 @@
 		background-color:transparent;
 	}
 	.cart-item {
-		position: absolute;
-		top:1px;
-		right:0px;
-
-		.cart-item__count {
+		.cart-item-count {
 			display:none;
-		}
-		@media screen and (max-width: 1024px) {
-			right:3.25rem;
 		}
 	}
 }
